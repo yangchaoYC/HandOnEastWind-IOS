@@ -12,4 +12,7 @@
 @interface NewsViewController : UIViewController
 @property (weak, nonatomic) IBOutlet NavigationScrollView *navigationScrollView;
 @property (weak, nonatomic) IBOutlet UIScrollView *newsListContainer;
+
+- (IBAction)chooseBtnClicked:(id)sender;
+- (void)refreshContent:(NSString *)columnName;
 @end

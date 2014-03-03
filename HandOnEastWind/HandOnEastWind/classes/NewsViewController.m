@@ -19,12 +19,9 @@
 @interface NewsViewController ()<UIScrollViewDelegate,NavigationScrollViewSlectedDelegate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)NSMutableArray *navigationsArray;
 @property(nonatomic,strong)NSMutableArray *newsListTableViewsArray;
-
-@property(nonatomic,strong)NSMutableDictionary *dataDic;
-
-@property(nonatomic,strong)NSDictionary *navAndIdMap;
-
 @property(nonatomic,assign)int currentSelectedNavIndex;
+@property (strong, nonatomic)NSString *columnName;
+
 @end
 
 @implementation NewsViewController
@@ -49,6 +46,26 @@
     };
 }
 
+- (NSInteger)getNavID:(NSString *)navName_
+{
+    int navID_ = 0;
+    FMDatabase *db = [FMDatabase databaseWithPath:[DB_PATH stringByAppendingPathComponent:@"poketeastwind.db"]];
+    NSString *sqlStr = @"SELECT * FROM nav_id_map WHERE nav_name = ?";
+    if ([db open])
+    {
+        [db beginTransaction];
+        
+        FMResultSet *rs = [db executeQuery:sqlStr,navName_];
+        while ([rs next]) {
+            navID_ = [rs intForColumn:@"nav_id"];
+        }
+        
+        [db commit];
+    }
+    
+    return navID_;
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,43 +76,72 @@
     return self;
 }
 
+- (IBAction)chooseBtnClicked:(id)sender
+{
+    
+}
+
+- (void)refreshContent:(NSString *)columnName
+{
+    NSDictionary *columnsDic = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"navigations" ofType:@"txt"]]
+                                                               options:NSJSONReadingAllowFragments error:nil];
+    
+    if ([columnName isEqualToString:self.columnName]) {
+        return;
+    }
+    else
+    {
+        self.currentSelectedNavIndex = 0;
+        [self.navigationScrollView selectNavigationAtIndex:self.currentSelectedNavIndex];
+        self.navigationScrollView.selectedDelegate = self;
+        
+        self.columnName = columnName;
+        
+        for (UIView *v in [self.navigationScrollView subviews]) {
+            [v removeFromSuperview];
+        }
+        for (UIView *v in self.newsListTableViewsArray) {
+            [v removeFromSuperview];
+        }
+        self.navigationsArray = [columnsDic objectForKey:self.columnName];
+        self.newsListTableViewsArray = [NSMutableArray array];
+
+        [self.navigationScrollView initNavigations:self.navigationsArray];
+        
+        for (int i=0; i<self.navigationsArray.count; i++) {
+            PullTableView *newsListTableView = [[PullTableView alloc] initWithFrame:CGRectMake(self.newsListContainer.frame.size.width * i, 0, self.newsListContainer.frame.size.width, self.newsListContainer.frame.size.height)];
+            newsListTableView.delegate = self;
+            newsListTableView.dataSource = self;
+            newsListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            
+            newsListTableView.navName = [self.navigationsArray objectAtIndex:i];
+            newsListTableView.navID = [self getNavID:newsListTableView.navName];
+            
+            [self.newsListContainer addSubview:newsListTableView];
+            [self.newsListTableViewsArray addObject:newsListTableView];
+            
+            if (!i) {
+                [newsListTableView autoRefresh];
+            }
+        }
+
+        self.newsListContainer.pagingEnabled = YES;
+        self.newsListContainer.bounces = NO;
+        [self.newsListContainer setContentSize:CGSizeMake(self.newsListContainer.frame.size.width * self.navigationsArray.count, self.newsListContainer.frame.size.height)];
+        
+        [self.navigationScrollView selectNavigationAtIndex:self.currentSelectedNavIndex];
+
+    }
+}
+
 - (void)viewDidLoad
 {    
     [self initDatabase];
-    
     [super viewDidLoad];
     
-    self.navigationScrollView.selectedDelegate = self;
-    self.navAndIdMap = @{@"头条": @"28",@"要闻":@"29",@"生产经营":@"30",@"东风党建":@"31",@"和谐东风":@"32",@"东风人":@"33"};
-    self.navigationsArray = [NSMutableArray arrayWithArray:@[@"头条",@"要闻",@"生产经营",@"东风党建",@"和谐东风",@"东风人"]];
-    
-    self.newsListTableViewsArray = [NSMutableArray array];
-    self.dataDic = [NSMutableDictionary dictionary];
-    
-	// Do any additional setup after loading the view, typically from a nib.
-    [self.navigationScrollView initNavigations:self.navigationsArray];
-    
-    for (int i=0; i<self.navigationsArray.count; i++) {
-        PullTableView *newsListTableView = [[PullTableView alloc] initWithFrame:CGRectMake(self.newsListContainer.frame.size.width * i, 0, self.newsListContainer.frame.size.width, self.newsListContainer.frame.size.height)];
-        newsListTableView.delegate = self;
-        newsListTableView.dataSource = self;
-        newsListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
-        newsListTableView.navName = [self.navigationsArray objectAtIndex:i];
-        newsListTableView.navID = [[self.navAndIdMap objectForKey:newsListTableView.navName] intValue];
-        
-        [self.newsListContainer addSubview:newsListTableView];
-        [self.newsListTableViewsArray addObject:newsListTableView];
-        
+    if (!self.columnName) {
+        [self refreshContent:@"东风汽车报"];
     }
-    
-    self.newsListContainer.pagingEnabled = YES;
-    self.newsListContainer.bounces = NO;
-    [self.newsListContainer setContentSize:CGSizeMake(self.newsListContainer.frame.size.width * self.navigationsArray.count, self.newsListContainer.frame.size.height)];
-    
-    self.currentSelectedNavIndex = 0;
-    [self.navigationScrollView selectNavigationAtIndex:self.currentSelectedNavIndex];
-
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -200,22 +246,22 @@
     [self performSegueWithIdentifier:@"NewsDetails" sender:newsItem];
 }
                                
-- (NSString *)stringFromDate:(NSDate *)date{
-                                   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                                   [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-                                   NSString *destDateString = [dateFormatter stringFromDate:date];
-                                   return destDateString;
-                                   
-                               }
+- (NSString *)stringFromDate:(NSDate *)date
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *destDateString = [dateFormatter stringFromDate:date];
+    return destDateString;
+}
 
-    - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-    {
-        UIViewController *send = [segue destinationViewController];
-        if ([send respondsToSelector:@selector(setNewsItem:)]) {
-            [send setValue:sender forKey:@"newsItem"];
-        }
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UIViewController *send = [segue destinationViewController];
+    if ([send respondsToSelector:@selector(setNewsItem:)]) {
+        [send setValue:sender forKey:@"newsItem"];
     }
-    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

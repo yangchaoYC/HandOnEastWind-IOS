@@ -52,6 +52,7 @@
 		3B9F1AE818B8D7B7007FD82E /* SharedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9F1AE718B8D7B7007FD82E /* SharedViewController.m */; };
 		3B9F1AEB18B8D7CD007FD82E /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9F1AEA18B8D7CD007FD82E /* SettingViewController.m */; };
 		3B9F1AEE18B8D90F007FD82E /* NewsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B9F1AED18B8D90F007FD82E /* NewsDetailsViewController.m */; };
+		3BFD6C5718C329630073F502 /* news_template.html in Resources */ = {isa = PBXBuildFile; fileRef = 3BFD6C5618C329630073F502 /* news_template.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		3B9F1AEA18B8D7CD007FD82E /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		3B9F1AEC18B8D90F007FD82E /* NewsDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailsViewController.h; sourceTree = "<group>"; };
 		3B9F1AED18B8D90F007FD82E /* NewsDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailsViewController.m; sourceTree = "<group>"; };
+		3BFD6C5618C329630073F502 /* news_template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = news_template.html; sourceTree = "<group>"; };
 		5349BA65B79B419F82402CEE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -208,6 +210,7 @@
 		3B7CD26618B9D4F300EC1975 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				3BFD6C5618C329630073F502 /* news_template.html */,
 				3B574E8718C1A2A100C6F6FC /* cache.sql */,
 				3B7CD26A18B9D78700EC1975 /* navigations.txt */,
 			);
@@ -315,6 +318,8 @@
 				3B9F1AE118B8D783007FD82E /* NavigationViewController.m */,
 				3B9F1AE318B8D79E007FD82E /* NewsViewController.h */,
 				3B9F1AE418B8D79E007FD82E /* NewsViewController.m */,
+				3B9F1AEC18B8D90F007FD82E /* NewsDetailsViewController.h */,
+				3B9F1AED18B8D90F007FD82E /* NewsDetailsViewController.m */,
 				3B574E8B18C1C0DA00C6F6FC /* NewsCell.h */,
 				3B574E8C18C1C0DA00C6F6FC /* NewsCell.m */,
 				3B574E9118C1C13F00C6F6FC /* NewsCell.xib */,
@@ -325,8 +330,6 @@
 				3B9F1AE718B8D7B7007FD82E /* SharedViewController.m */,
 				3B9F1AE918B8D7CD007FD82E /* SettingViewController.h */,
 				3B9F1AEA18B8D7CD007FD82E /* SettingViewController.m */,
-				3B9F1AEC18B8D90F007FD82E /* NewsDetailsViewController.h */,
-				3B9F1AED18B8D90F007FD82E /* NewsDetailsViewController.m */,
 				3B7CD26018B9C2C100EC1975 /* CustomTabBarView.h */,
 				3B7CD26118B9C2C100EC1975 /* CustomTabBarView.m */,
 				3B7CD26318B9C2D900EC1975 /* CustomTabBarView.xib */,
@@ -421,6 +424,7 @@
 				3B834D3018B8792600AA5876 /* Main.storyboard in Resources */,
 				3B28FDB818B9FAB100E1D5B1 /* whiteArrow@2x.png in Resources */,
 				3B28FDB218B9FAB100E1D5B1 /* blackArrow@2x.png in Resources */,
+				3BFD6C5718C329630073F502 /* news_template.html in Resources */,
 				3B28FDB518B9FAB100E1D5B1 /* grayArrow.png in Resources */,
 				3B28FDB418B9FAB100E1D5B1 /* blueArrow@2x.png in Resources */,
 				3B574E9218C1C13F00C6F6FC /* NewsCell.xib in Resources */,

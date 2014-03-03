@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface NavigationViewController : UIViewController
+- (IBAction)selectNavigation:(id)sender;
 
 @end

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A72C5EDE05EA47D2911BA0CA"
+               BlueprintIdentifier = "DBB1DAD290F94591A818C181"
                BuildableName = "libPods-EGOImageLoading.a"
                BlueprintName = "Pods-EGOImageLoading"
                ReferencedContainer = "container:Pods.xcodeproj">
