@@ -56,10 +56,21 @@
     {
         html = [html stringByReplacingOccurrencesOfString:@"{Content}" withString:self.newsItem.body_2];
     }
-    [self.newsDetailWebView loadHTMLString:html baseURL:baseURL];
+    switch ([self getFontsize]) {
+        case 0:
+            html = [html stringByReplacingOccurrencesOfString:@"{fontSize}" withString:@"10pt"];
+            break;
+        case 1:
+            html = [html stringByReplacingOccurrencesOfString:@"{fontSize}" withString:@"15pt"];
+            break;
+        case 2:
+            html = [html stringByReplacingOccurrencesOfString:@"{fontSize}" withString:@"20pt"];
+            break;
+        default:
+            break;
+    }
     
-    NSString *changeFontSizeString = [NSString stringWithFormat:@"changeFontSize(%d);",[self getFontsize]];
-    [self.newsDetailWebView stringByEvaluatingJavaScriptFromString:changeFontSizeString];
+    [self.newsDetailWebView loadHTMLString:html baseURL:baseURL];
 }
 
 - (void)didReceiveMemoryWarning

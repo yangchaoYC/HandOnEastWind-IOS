@@ -8,6 +8,9 @@
 
 #import "SettingViewController.h"
 
+#define ITCACHE_PATH NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]
+#define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
+
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -21,6 +24,12 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.settingTableView reloadData];
 }
 
 - (void)viewDidLoad
@@ -43,7 +52,7 @@
 {
     static NSString *CellIdentifier = @"SettingCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell;// = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
@@ -95,24 +104,29 @@
         case 4:
         {
             titleLabel.text = @"清除缓存";
+            
+            CGFloat cacheSize = [self folderSizeAtPath:ITCACHE_PATH] + [self fileSizeAtPath:[DB_PATH stringByAppendingPathComponent:@"poketeastwind.db"]];
+            
+            
             UILabel *cacheLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 0, 100, 30)];
-            cacheLabel.text = @"缓存大小。。。。。";
+            cacheLabel.font = [UIFont systemFontOfSize:12.0f];
+            cacheLabel.text = [NSString stringWithFormat:@"缓存大小 %.2f M",cacheSize];
             [cell.contentView addSubview:cacheLabel];
         }
             break;
         case 5:
         {
-            titleLabel.text = @"字体大小";
+            titleLabel.text = @"关于";
         }
             break;
         case 6:
         {
-            titleLabel.text = @"字体大小";
+            titleLabel.text = @"免责声明";
         }
             break;
         case 7:
         {
-            titleLabel.text = @"字体大小";
+            titleLabel.text = @"检查更新";
         }
             break;
         default:
@@ -125,11 +139,44 @@
     return cell;
 }
 
+//单个文件的大小
+- (CGFloat)fileSizeAtPath:(NSString*) filePath{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:filePath]){
+        return [[manager attributesOfItemAtPath:filePath error:nil] fileSize] /(1024.0*1024.0);
+    }
+    return 0;
+}
+//遍历文件夹获得文件夹大小，返回多少M
+- (CGFloat)folderSizeAtPath:(NSString*) folderPath{
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:folderPath]) return 0;
+    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];
+    NSString* fileName;
+    long long folderSize = 0;
+    while ((fileName = [childFilesEnumerator nextObject]) != nil){
+        NSString* fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
+        folderSize += [self fileSizeAtPath:fileAbsolutePath];
+    }
+    return folderSize/(1024.0*1024.0);
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.row) {
         case 4:
+        {
             //清除缓存
+            NSFileManager* manager = [NSFileManager defaultManager];
+            NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:ITCACHE_PATH] objectEnumerator];
+            NSString* fileName;
+            while ((fileName = [childFilesEnumerator nextObject]) != nil){
+                NSString* fileAbsolutePath = [ITCACHE_PATH stringByAppendingPathComponent:fileName];
+                [manager removeItemAtPath:fileAbsolutePath error:nil];
+            }
+            
+            [self.settingTableView reloadData];
+        }
             break;
         case 5:
             //关于

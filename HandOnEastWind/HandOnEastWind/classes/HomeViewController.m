@@ -36,32 +36,20 @@
 	// Do any additional setup after loading the view.
     //self.tabBar.hidden = YES;
     
-    /*
-    CustomTabBarView *tabBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomTabBarView" owner:self options:nil] lastObject];
-    tabBar.frame = self.tabBar.frame;
-    tabBar.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-    
-    tabBar.selectedDelegate = self;
-    [self.view addSubview:tabBar];
+    for (UIView *v in [self.view subviews]) {
+        if ([v isKindOfClass:[UITabBar class]]) {
+            CustomTabBarView *tabBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomTabBarView" owner:self options:nil] lastObject];
+            tabBar.frame = self.tabBar.frame;
+            tabBar.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+            
+            tabBar.selectedDelegate = self;
+            [self.view insertSubview:tabBar aboveSubview:v];
+            
+            break;
+        }
+    }
     
     [self selectedTabBarAtIndex:1];
-    
-    
-    NSLog(@"%@", [self.view subviews]);
-    for (UIView *v in [self.view subviews]) {
-        if ([v isKindOfClass:[UITabBar class]] || [v isKindOfClass:[CustomTabBarView class]]) {
-            
-        }
-        else
-        {
-            v.frame = CGRectMake(0, 0, 320, 480 - 49);
-            v.autoresizingMask = UIViewAutoresizingNone;
-
-        }
-        
-    }
-     */
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectNavigation:) name:@"SelectNavigation" object:nil];
 }
 

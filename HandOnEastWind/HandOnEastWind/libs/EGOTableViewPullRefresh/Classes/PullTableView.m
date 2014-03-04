@@ -125,7 +125,7 @@
     if ([db open])
     {
         [db beginTransaction];
-        NSString *sqlString = @"SELECT * FROM news WHERE field_channel = ? ORDER BY node_created DESC ";// limit 15";
+        NSString *sqlString = @"SELECT * FROM news WHERE field_channel = ? ORDER BY node_created DESC limit 15";
         FMResultSet *rs = [db executeQuery:sqlString,self.navName];
         while ([rs next]) {
             NewsModel *newsItem = [[NewsModel alloc] initFMResultSet:rs];
@@ -134,7 +134,7 @@
         [db commit];
         [db close];
     }
-    
+    self.currentPage = 1;
     [self reloadData];
 }
 

@@ -108,6 +108,14 @@
 
         [self.navigationScrollView initNavigations:self.navigationsArray];
         
+        //3.5寸屏幕
+        if (self.view.bounds.size.height <= 480.0f) {
+            self.newsListContainer.frame = CGRectMake(self.newsListContainer.frame.origin.x,
+                                                      self.newsListContainer.frame.origin.y,
+                                                      self.newsListContainer.frame.size.width,
+                                                      370.0f);
+        }
+        
         for (int i=0; i<self.navigationsArray.count; i++) {
             PullTableView *newsListTableView = [[PullTableView alloc] initWithFrame:CGRectMake(self.newsListContainer.frame.size.width * i, 0, self.newsListContainer.frame.size.width, self.newsListContainer.frame.size.height)];
             newsListTableView.delegate = self;
@@ -130,7 +138,6 @@
         [self.newsListContainer setContentSize:CGSizeMake(self.newsListContainer.frame.size.width * self.navigationsArray.count, self.newsListContainer.frame.size.height)];
         
         [self.navigationScrollView selectNavigationAtIndex:self.currentSelectedNavIndex];
-
     }
 }
 

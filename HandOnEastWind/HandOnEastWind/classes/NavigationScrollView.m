@@ -71,9 +71,6 @@
     
     self.contentSize = CGSizeMake(start_x - navigationGap, self.bounds.size.height);
     
-    for (UIView *v in self.subviews) {
-        NSLog(@"%f",v.frame.origin.y);
-    }
     [self setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
