@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EGOImageView.h"
 
 @interface NewsFocusCell : UITableViewCell
-    @property (weak, nonatomic) IBOutlet EGOImageView *focusImageView;
+    @property (weak, nonatomic) IBOutlet UIImageView *focusImageView;
     @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 
 @end

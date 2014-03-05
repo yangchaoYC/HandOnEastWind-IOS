@@ -15,6 +15,7 @@
 #import "NewsModel.h"
 #import "NewsCell.h"
 #import "NewsFocusCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface NewsViewController ()<UIScrollViewDelegate,NavigationScrollViewSlectedDelegate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)NSMutableArray *navigationsArray;
@@ -222,7 +223,8 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"NewsFocusCell" owner:self options:nil] lastObject];
         }
         
-        [[(NewsFocusCell *)cell focusImageView] setImageURL:[NSURL URLWithString:newsItem.field_thumbnails]];
+        [[(NewsFocusCell *)cell focusImageView] setImageWithURL:[NSURL URLWithString:newsItem.field_thumbnails] placeholderImage:nil];
+        
         [(NewsFocusCell *)cell labelTitle].text = newsItem.node_title;
         
     }
@@ -233,7 +235,7 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"NewsCell" owner:self options:nil] lastObject];
         }
         
-        [[(NewsCell *)cell newsIconImageView] setImageURL:[NSURL URLWithString:newsItem.field_thumbnails]];
+        [[(NewsCell *)cell newsIconImageView] setImageWithURL:[NSURL URLWithString:newsItem.field_thumbnails] placeholderImage:nil];
         [(NewsCell *)cell labelTitle].text = newsItem.node_title;
         [(NewsCell *)cell labelContent].text = newsItem.field_summary;
         [(NewsCell *)cell labelSource].text = newsItem.field_newsfrom;
