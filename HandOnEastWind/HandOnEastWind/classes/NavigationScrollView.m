@@ -56,6 +56,7 @@
         navigationItem.textColor = [UIColor colorWithRed:.8f green:.8f blue:.8f alpha:1];
         navigationItem.font = [UIFont boldSystemFontOfSize:18.0f];
         navigationItem.backgroundColor = [UIColor clearColor];
+        navigationItem.textAlignment = NSTextAlignmentCenter;
         navigationItem.tag = i;
  
         UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -70,6 +71,17 @@
     }
     
     self.contentSize = CGSizeMake(start_x - navigationGap, self.bounds.size.height);
+    
+    //栏目过少，无法占满时，适配
+    if (self.contentSize.width < self.frame.size.width - navigationGap) {
+        CGFloat min_width = (self.frame.size.width - navigationGap - self.contentSize.width) / navigations_.count;
+        for (int i=0; i<self.navigationsArray.count; i++) {
+            UILabel *item = [self.navigationsArray objectAtIndex:i];
+            item.frame = CGRectMake(min_width * i + item.frame.origin.x, item.frame.origin.y, min_width + item.frame.size.width, item.frame.size.height);
+        }
+        
+        self.contentSize = CGSizeMake(self.frame.size.width, self.contentSize.height);
+    }
     
     [self setContentOffset:CGPointMake(0, 0) animated:YES];
 }

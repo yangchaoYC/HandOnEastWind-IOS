@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "CustomTabBarView.h"
 #import "NewsViewController.h"
+#import "AdView.h"
 
 @interface HomeViewController ()<CustomTabBarViewSelectedDelegate>
 
@@ -51,6 +52,18 @@
     
     [self selectedTabBarAtIndex:1];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectNavigation:) name:@"SelectNavigation" object:nil];
+    
+    UIView *adView = [AdView sharedAdView:self.view.frame];
+    [self.view addSubview:adView];
+    
+    [UIView animateKeyframesWithDuration:1.0f delay:3.0f options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+        
+        CGRect frame = CGRectMake(-1 * adView.frame.size.width, 0, adView.frame.size.width, adView.frame.size.height);
+        adView.frame = frame;
+        
+    }completion:^(BOOL finished){
+        
+    }];
 }
 
 - (void)selectNavigation:(NSNotification *)notif

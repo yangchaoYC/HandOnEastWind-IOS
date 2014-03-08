@@ -16,6 +16,7 @@
 #import "NewsCell.h"
 #import "NewsFocusCell.h"
 #import "UIImageView+WebCache.h"
+#import "AdView.h"
 
 @interface NewsViewController ()<UIScrollViewDelegate,NavigationScrollViewSlectedDelegate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)NSMutableArray *navigationsArray;
@@ -23,9 +24,13 @@
 @property(nonatomic,assign)int currentSelectedNavIndex;
 @property (strong, nonatomic)NSString *columnName;
 
+@property(assign,nonatomic)BOOL hasImage;
 @end
 
 @implementation NewsViewController
+{
+    CGPoint velocity_;
+}
 
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
 - (void)initDatabase
@@ -134,8 +139,8 @@
             }
         }
 
-        self.newsListContainer.pagingEnabled = YES;
         self.newsListContainer.bounces = NO;
+        self.newsListContainer.pagingEnabled = YES;
         [self.newsListContainer setContentSize:CGSizeMake(self.newsListContainer.frame.size.width * self.navigationsArray.count, self.newsListContainer.frame.size.height)];
         
         [self.navigationScrollView selectNavigationAtIndex:self.currentSelectedNavIndex];
@@ -150,6 +155,30 @@
     if (!self.columnName) {
         [self refreshContent:@"东风汽车报"];
     }
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    id hasImage_ = [[NSUserDefaults standardUserDefaults] valueForKey:@"HASIMAGE"];
+    if (!hasImage_) {
+        self.hasImage = YES;
+    }
+    else
+    {
+        self.hasImage = [hasImage_ boolValue];
+    }
+    
+    for (UITableView *newsList in self.newsListTableViewsArray) {
+        [newsList reloadData];
+    }
+    
+}
+
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    velocity_ = velocity;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -176,6 +205,15 @@
     if (scrollView == self.newsListContainer) {
         if (decelerate) {
             self.newsListContainer.userInteractionEnabled = NO;
+        }
+        else
+        {
+            if (velocity_.x < 0) {
+                AdView *adView = [AdView sharedAdView:self.view.frame];
+                [UIView animateWithDuration:.5f animations:^{
+                    adView.frame = CGRectMake(0, 0, adView.frame.size.width, adView.frame.size.height);
+                }];
+            }
         }
     }
 }
@@ -223,7 +261,13 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"NewsFocusCell" owner:self options:nil] lastObject];
         }
         
-        [[(NewsFocusCell *)cell focusImageView] setImageWithURL:[NSURL URLWithString:newsItem.field_thumbnails] placeholderImage:nil];
+        if (self.hasImage) {
+            [[(NewsFocusCell *)cell focusImageView] setImageWithURL:[NSURL URLWithString:newsItem.field_thumbnails] placeholderImage:[UIImage imageNamed:@"image_default.png"]];
+        }
+        else
+        {
+            [[(NewsFocusCell *)cell focusImageView] setImage:[UIImage imageNamed:@"image_default.png"]];
+        }
         
         [(NewsFocusCell *)cell labelTitle].text = newsItem.node_title;
         
@@ -235,7 +279,14 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"NewsCell" owner:self options:nil] lastObject];
         }
         
-        [[(NewsCell *)cell newsIconImageView] setImageWithURL:[NSURL URLWithString:newsItem.field_thumbnails] placeholderImage:nil];
+        if (self.hasImage) {
+            [[(NewsCell *)cell newsIconImageView] setImageWithURL:[NSURL URLWithString:newsItem.field_thumbnails] placeholderImage:[UIImage imageNamed:@"image_default.png"]];
+        }
+        else
+        {
+            [[(NewsCell *)cell newsIconImageView] setImage:[UIImage imageNamed:@"image_default.png"]];
+        }
+        
         [(NewsCell *)cell labelTitle].text = newsItem.node_title;
         [(NewsCell *)cell labelContent].text = newsItem.field_summary;
         [(NewsCell *)cell labelSource].text = newsItem.field_newsfrom;

@@ -26,10 +26,9 @@
     // Configure the view for the selected state
 }
     
-    -(void)awakeFromNib
-    {
-        self.focusImageView.layer.masksToBounds = YES;
-        self.focusImageView.layer.cornerRadius = 5.0f;
-    }
-
+-(void)awakeFromNib
+{
+    self.focusImageView.layer.masksToBounds = YES;
+    self.focusImageView.layer.cornerRadius = 5.0f;
+}
 @end

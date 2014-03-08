@@ -48,6 +48,11 @@
     
     html = [html stringByReplacingOccurrencesOfString:@"{time}" withString:destDateString];
     
+    
+    NSString *regexString       = @"<img[^>]+src\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>";
+    NSString *replaceWithString = @"";
+    html = [html stringByReplacingOccurrencesOfRegex:regexString withString:replaceWithString];
+    
     BOOL hasImage = [[[NSUserDefaults standardUserDefaults] valueForKey:@"HASIMAGE"] boolValue];
     if (hasImage) {
         html = [html stringByReplacingOccurrencesOfString:@"{Content}" withString:self.newsItem.body_1];
