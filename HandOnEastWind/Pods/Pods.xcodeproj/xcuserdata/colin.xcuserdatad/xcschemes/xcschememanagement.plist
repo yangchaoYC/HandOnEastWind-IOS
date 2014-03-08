@@ -8,86 +8,51 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>Pods-EGOCache.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
-		<key>Pods-EGOImageLoading.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Pods-FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
+		</dict>
+		<key>Pods-RegexKitLite.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-SDWebImage.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>10F672601F2B448BA8916ED4</key>
+		<key>24EC2680D18E480FB45279C3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>16A11368B76142879EC32EDF</key>
+		<key>680E9955387C47A4A8E87CBB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2BBFC0E8F1CF48D9B5BEFE58</key>
+		<key>AB075EEFB73A419B827344D8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>63A8390321A0480AA9F6676E</key>
+		<key>BBF8BCECD1F64602A6B4EC05</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>736BC09171F348EC95C8EA19</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8A7282E14C16438C9FB11659</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B587F7964184473CAE8A7246</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CF49E40B763B4F71B0C25FEE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DBB1DAD290F94591A818C181</key>
+		<key>F388571B01AE4A418338A3E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

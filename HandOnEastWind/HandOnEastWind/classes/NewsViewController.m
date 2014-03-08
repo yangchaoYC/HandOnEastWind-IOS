@@ -154,8 +154,10 @@
     
     if (!self.columnName) {
         [self refreshContent:@"东风汽车报"];
+        for (UIView *v in [self.view subviews]) {            
+            v.frame = CGRectMake(v.frame.origin.x, v.frame.origin.y, v.frame.size.width, v.frame.size.height + 69);
+        }
     }
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -173,7 +175,6 @@
     for (UITableView *newsList in self.newsListTableViewsArray) {
         [newsList reloadData];
     }
-    
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset

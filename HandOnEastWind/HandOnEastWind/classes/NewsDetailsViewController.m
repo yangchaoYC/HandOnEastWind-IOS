@@ -8,6 +8,7 @@
 
 #import "NewsDetailsViewController.h"
 #import "NewsModel.h"
+#import "RegexKitLite.h"
 
 @interface NewsDetailsViewController ()
 
@@ -48,18 +49,14 @@
     
     html = [html stringByReplacingOccurrencesOfString:@"{time}" withString:destDateString];
     
-    
-    NSString *regexString       = @"<img[^>]+src\\s*=\\s*['\"]([^'\"]+)['\"][^>]*>";
-    NSString *replaceWithString = @"";
-    html = [html stringByReplacingOccurrencesOfRegex:regexString withString:replaceWithString];
-    
     BOOL hasImage = [[[NSUserDefaults standardUserDefaults] valueForKey:@"HASIMAGE"] boolValue];
-    if (hasImage) {
-        html = [html stringByReplacingOccurrencesOfString:@"{Content}" withString:self.newsItem.body_1];
-    }
-    else
-    {
-        html = [html stringByReplacingOccurrencesOfString:@"{Content}" withString:self.newsItem.body_2];
+    
+    html = [html stringByReplacingOccurrencesOfString:@"{Content}" withString:self.newsItem.body_1];
+
+    if (!hasImage) {
+        NSString *regexString       = @"<img[^>]+alt=\"([^>]+)\"[^>]*>";
+        NSString *replaceWithString = @" ";
+        html = [html stringByReplacingOccurrencesOfRegex:regexString withString:replaceWithString];
     }
     switch ([self getFontsize]) {
         case 0:

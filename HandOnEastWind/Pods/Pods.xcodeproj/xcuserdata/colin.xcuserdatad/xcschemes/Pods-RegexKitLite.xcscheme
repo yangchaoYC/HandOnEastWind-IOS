@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "63A8390321A0480AA9F6676E"
-               BuildableName = "libPods-EGOCache.a"
-               BlueprintName = "Pods-EGOCache"
+               BlueprintIdentifier = "24EC2680D18E480FB45279C3"
+               BuildableName = "libPods-RegexKitLite.a"
+               BlueprintName = "Pods-RegexKitLite"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

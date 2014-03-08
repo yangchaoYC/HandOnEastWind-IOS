@@ -56,13 +56,10 @@
     UIView *adView = [AdView sharedAdView:self.view.frame];
     [self.view addSubview:adView];
     
-    [UIView animateKeyframesWithDuration:1.0f delay:3.0f options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
-        
+    [UIView animateWithDuration:1.0f delay:3.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect frame = CGRectMake(-1 * adView.frame.size.width, 0, adView.frame.size.width, adView.frame.size.height);
         adView.frame = frame;
-        
-    }completion:^(BOOL finished){
-        
+    } completion:^(BOOL finished){
     }];
 }
 

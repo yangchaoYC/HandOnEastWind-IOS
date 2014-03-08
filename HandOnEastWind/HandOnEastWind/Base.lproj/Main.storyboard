@@ -240,7 +240,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" id="v73-hy-YYN">
                                 <rect key="frame" x="0.0" y="20" width="320" height="499"/>
-                                <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="VFC-Cc-YxU">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
