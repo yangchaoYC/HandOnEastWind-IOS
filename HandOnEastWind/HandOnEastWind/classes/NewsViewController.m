@@ -84,7 +84,80 @@
 
 - (IBAction)chooseBtnClicked:(id)sender
 {
+    UIView *maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 20.0f, 320.0f, self.view.frame.size.height - 20.0f)];
+    maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.3f];
+    maskView.tag = 99990;
+    [self.view addSubview:maskView];
     
+    UIView *barView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0f, 44.0f)];
+    barView.backgroundColor = [UIColor colorWithRed:170.0f / 255 green:130.0f / 255 blue:60.0f /255 alpha:1];
+
+    UILabel *noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 0, 100, 44)];
+    noticeLabel.font = [UIFont boldSystemFontOfSize:18.0f];
+    noticeLabel.textColor = [UIColor whiteColor];
+    noticeLabel.text = @"更多频道";
+    [barView addSubview:noticeLabel];
+    
+    UIView *navigationContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, 320.0f, 0)];
+    navigationContainerView.backgroundColor = [UIColor whiteColor];
+    
+    CGFloat gap_x = 20.0f;
+    CGFloat gap_y = 20.0f;
+    CGFloat start_x = 0;
+    CGFloat start_y = 0;
+    
+    for (int i=0; i<self.navigationsArray.count; i++) {
+        UILabel *navigationItem = [[UILabel alloc] init];
+        navigationItem.text = [self.navigationsArray objectAtIndex:i];
+        CGSize btnSize = [[self.navigationsArray objectAtIndex:i] sizeWithFont:[UIFont boldSystemFontOfSize:18.0f]
+                                                    constrainedToSize:CGSizeMake(MAXFLOAT, 20.0f)];
+        
+        navigationItem.frame = CGRectMake(start_x + gap_x, start_y + gap_y, btnSize.width, 20.0f);
+        if (navigationItem.frame.origin.x + navigationItem.frame.size.width > 320.0f) {
+            start_x = 0;
+            start_y = start_y + 20.0f + gap_y;
+            navigationItem.frame = CGRectMake(start_x + gap_x , start_y + gap_y, btnSize.width, 20.0f);
+        }
+        start_x = start_x + navigationItem.frame.size.width + gap_x;
+
+        navigationItem.textColor = [UIColor colorWithRed:.8f green:.8f blue:.8f alpha:1];
+        navigationItem.font = [UIFont boldSystemFontOfSize:18.0f];
+        navigationItem.backgroundColor = [UIColor clearColor];
+        navigationItem.textAlignment = NSTextAlignmentCenter;
+        navigationItem.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        navigationItem.layer.borderWidth = .5f;
+        navigationItem.layer.shadowOffset = CGSizeMake(2, 2);
+        navigationItem.tag = i;
+        
+        UIGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMoreViewNavigationTap:)];
+        [navigationItem addGestureRecognizer:tap];
+        navigationItem.userInteractionEnabled = YES;
+        
+        [navigationContainerView addSubview:navigationItem];
+    }
+    
+    navigationContainerView.frame = CGRectMake(navigationContainerView.frame.origin.x, navigationContainerView.frame.origin.y,
+                                               navigationContainerView.frame.size.width, start_y + 20.0f + gap_y + gap_y);
+    
+    [maskView addSubview:barView];
+    [maskView addSubview:navigationContainerView];
+    
+}
+
+- (void)removeMoreView
+{
+    for (UIView *v in [self.view subviews]) {
+        if (v.tag == 99990) {
+            [v removeFromSuperview];
+        }
+    }
+}
+
+- (void)handleMoreViewNavigationTap:(UITapGestureRecognizer *)ges
+{
+    [self.navigationScrollView selectNavigationAtIndex:ges.view.tag];
+    //[self.navigationScrollView updateAttentionViewFrame:ges.view.tag * 320.0f];
+    [self removeMoreView];
 }
 
 - (void)refreshContent:(NSString *)columnName
@@ -134,7 +207,7 @@
             [self.newsListContainer addSubview:newsListTableView];
             [self.newsListTableViewsArray addObject:newsListTableView];
             
-            if (!i) {
+            if (i < 2) {
                 [newsListTableView autoRefresh];
             }
         }
@@ -175,6 +248,12 @@
     for (UITableView *newsList in self.newsListTableViewsArray) {
         [newsList reloadData];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self removeMoreView];
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
@@ -221,11 +300,78 @@
 
 - (void)selectedNavigationItemAtIndex:(int)index_
 {
+    //判断是否跳跃点击
+    if (abs(self.currentSelectedNavIndex - index_) > 1) {
+        
+        //释放前面的
+        PullTableView *newsListTableView = [self.newsListTableViewsArray objectAtIndex:self.currentSelectedNavIndex];
+        newsListTableView.dataArray = nil;
+        [newsListTableView reloadData];
+        
+        if (self.currentSelectedNavIndex - 1 >= 0) {
+            PullTableView *newsListTableView = [self.newsListTableViewsArray objectAtIndex:self.currentSelectedNavIndex - 1];
+            newsListTableView.dataArray = nil;
+            [newsListTableView reloadData];
+        }
+        if (self.currentSelectedNavIndex + 1 < self.navigationsArray.count) {
+            PullTableView *newsListTableView = [self.newsListTableViewsArray objectAtIndex:self.currentSelectedNavIndex + 1];
+            newsListTableView.dataArray = nil;
+            [newsListTableView reloadData];
+        }
+        
+        //加载当前的
+        PullTableView *currentNewsListTableView = [self.newsListTableViewsArray objectAtIndex:index_];
+        [currentNewsListTableView autoRefresh];
+        
+        if (index_ - 1 >= 0) {
+            PullTableView *newsListTableView = [self.newsListTableViewsArray objectAtIndex:index_ - 1];
+            [newsListTableView autoRefresh];
+        }
+        if (index_ + 1 < self.navigationsArray.count) {
+            PullTableView *newsListTableView = [self.newsListTableViewsArray objectAtIndex:index_ + 1];
+            [newsListTableView autoRefresh];
+        }
+        
+        self.currentSelectedNavIndex = index_;
+        [self.newsListContainer setContentOffset:CGPointMake(320.0f * index_, 0)];
+        return;
+    }
+    
+    
+    
+    //先判断是左滑还是右滑
+    BOOL isSideLeft = NO;
+    if (self.currentSelectedNavIndex > index_) {
+        isSideLeft = YES;
+    }
+    
     self.currentSelectedNavIndex = index_;
     [self.newsListContainer setContentOffset:CGPointMake(320.0f * index_, 0)];
     
-    PullTableView *newsListTableView = [self.newsListTableViewsArray objectAtIndex:index_];
-    [newsListTableView autoRefresh];
+    if (isSideLeft) {
+        if (self.currentSelectedNavIndex - 1 >= 0) {  //前一个加载
+            PullTableView *newsListTableView = [self.newsListTableViewsArray objectAtIndex:self.currentSelectedNavIndex - 1];
+            [newsListTableView autoRefresh];
+        }
+        if (self.currentSelectedNavIndex + 2 < self.navigationsArray.count) {  //释放后一个
+            PullTableView *newsListTableView = [self.newsListTableViewsArray objectAtIndex:self.currentSelectedNavIndex + 2];
+            newsListTableView.dataArray = nil;
+            [newsListTableView reloadData];
+        }
+    }
+    else
+    {
+        if (self.currentSelectedNavIndex + 1 < self.navigationsArray.count) {  //释放后一个
+            PullTableView *newsListTableView = [self.newsListTableViewsArray objectAtIndex:self.currentSelectedNavIndex + 1];
+            [newsListTableView autoRefresh];
+        }
+        if (self.currentSelectedNavIndex - 2 >= 0) {  //前一个加载
+            PullTableView *newsListTableView = [self.newsListTableViewsArray objectAtIndex:self.currentSelectedNavIndex - 2];
+            newsListTableView.dataArray = nil;
+            [newsListTableView reloadData];
+        }
+    }
+    
 }
 
 #pragma mark - UITableViewDataSource
