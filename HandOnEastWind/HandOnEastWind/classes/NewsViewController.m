@@ -33,25 +33,6 @@
 }
 
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
-- (void)initDatabase
-{
-    if (![[NSFileManager defaultManager] fileExistsAtPath:[DB_PATH stringByAppendingPathComponent:@"poketeastwind.db"]]) {
-        FMDatabase *db = [FMDatabase databaseWithPath:[DB_PATH stringByAppendingPathComponent:@"poketeastwind.db"]];
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"cache" ofType:@"sql" ];
-        NSError *error;
-        NSString *sqlStr = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
-        NSArray *sqls = [sqlStr componentsSeparatedByString:@"\n"];
-        if ([db open])
-        {
-            [db beginTransaction];
-            for (int i=0; i<sqls.count; i++) {
-                [db executeUpdate:[sqls objectAtIndex:i]];
-            }
-            [db commit];
-        }
-    };
-}
-
 - (NSInteger)getNavID:(NSString *)navName_
 {
     int navID_ = 0;
@@ -222,7 +203,6 @@
 
 - (void)viewDidLoad
 {    
-    [self initDatabase];
     [super viewDidLoad];
     
     if (!self.columnName) {

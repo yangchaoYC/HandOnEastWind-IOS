@@ -7,15 +7,39 @@
 //
 
 #import "AppDelegate.h"
+#import "FMDatabase.h"
+
+#define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [self initDatabase];
+    
     return YES;
 }
-							
+
+- (void)initDatabase
+{
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[DB_PATH stringByAppendingPathComponent:@"poketeastwind.db"]]) {
+        FMDatabase *db = [FMDatabase databaseWithPath:[DB_PATH stringByAppendingPathComponent:@"poketeastwind.db"]];
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"cache" ofType:@"sql" ];
+        NSError *error;
+        NSString *sqlStr = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
+        NSArray *sqls = [sqlStr componentsSeparatedByString:@"\n"];
+        if ([db open])
+        {
+            [db beginTransaction];
+            for (int i=0; i<sqls.count; i++) {
+                [db executeUpdate:[sqls objectAtIndex:i]];
+            }
+            [db commit];
+        }
+    };
+}
+						
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

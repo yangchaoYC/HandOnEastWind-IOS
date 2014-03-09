@@ -7,6 +7,9 @@
 //
 
 #import "SettingViewController.h"
+#include <sys/stat.h>
+#include <dirent.h>
+#import "FMDatabase.h"
 
 #define ITCACHE_PATH NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
@@ -105,12 +108,15 @@
         {
             titleLabel.text = @"清除缓存";
             
-            CGFloat cacheSize = [self folderSizeAtPath:ITCACHE_PATH] + [self fileSizeAtPath:[DB_PATH stringByAppendingPathComponent:@"poketeastwind.db"]];
+            long long imageCacheSize = [self folderSizeAtPath:[[ITCACHE_PATH stringByAppendingPathComponent:@"com.hackemist.SDWebImageCache.default"] cStringUsingEncoding:NSUTF8StringEncoding]];
+            
+            long long sumSize = imageCacheSize;
+            
             
             
             UILabel *cacheLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 0, 100, 30)];
             cacheLabel.font = [UIFont systemFontOfSize:12.0f];
-            cacheLabel.text = [NSString stringWithFormat:@"缓存大小 %.2f M",cacheSize];
+            cacheLabel.text = [NSString stringWithFormat:@"缓存大小 %.2f M",sumSize / 1024.0f / 1024.0f];
             [cell.contentView addSubview:cacheLabel];
         }
             break;
@@ -139,26 +145,45 @@
     return cell;
 }
 
-//单个文件的大小
 - (CGFloat)fileSizeAtPath:(NSString*) filePath{
     NSFileManager* manager = [NSFileManager defaultManager];
     if ([manager fileExistsAtPath:filePath]){
-        return [[manager attributesOfItemAtPath:filePath error:nil] fileSize] /(1024.0*1024.0);
+        return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
     }
     return 0;
 }
-//遍历文件夹获得文件夹大小，返回多少M
-- (CGFloat)folderSizeAtPath:(NSString*) folderPath{
-    NSFileManager* manager = [NSFileManager defaultManager];
-    if (![manager fileExistsAtPath:folderPath]) return 0;
-    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];
-    NSString* fileName;
+
+- (long long)folderSizeAtPath: (const char*)folderPath{
     long long folderSize = 0;
-    while ((fileName = [childFilesEnumerator nextObject]) != nil){
-        NSString* fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
-        folderSize += [self fileSizeAtPath:fileAbsolutePath];
+    DIR* dir = opendir(folderPath);
+    if (dir == NULL) return 0;
+    struct dirent* child;
+    while ((child = readdir(dir))!=NULL) {
+        if (child->d_type == DT_DIR && (
+                                        (child->d_name[0] == '.' && child->d_name[1] == 0) || // 忽略目录 .
+                                        (child->d_name[0] == '.' && child->d_name[1] == '.' && child->d_name[2] == 0) // 忽略目录 ..
+                                        )) continue;
+        
+        int folderPathLength = strlen(folderPath);
+        char childPath[1024]; // 子文件的路径地址
+        stpcpy(childPath, folderPath);
+        if (folderPath[folderPathLength-1] != '/'){
+            childPath[folderPathLength] = '/';
+            folderPathLength++;
+        }
+        stpcpy(childPath+folderPathLength, child->d_name);
+        childPath[folderPathLength + child->d_namlen] = 0;
+        if (child->d_type == DT_DIR){ // directory
+            folderSize += [self folderSizeAtPath:childPath]; // 递归调用子目录
+            // 把目录本身所占的空间也加上
+            struct stat st;
+            if(lstat(childPath, &st) == 0) folderSize += st.st_size;
+        }else if (child->d_type == DT_REG || child->d_type == DT_LNK){ // file or link
+            struct stat st;
+            if(lstat(childPath, &st) == 0) folderSize += st.st_size;
+        }
     }
-    return folderSize/(1024.0*1024.0);
+    return folderSize;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -166,14 +191,23 @@
     switch (indexPath.row) {
         case 4:
         {
-            //清除缓存
-            NSFileManager* manager = [NSFileManager defaultManager];
-            NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:ITCACHE_PATH] objectEnumerator];
-            NSString* fileName;
-            while ((fileName = [childFilesEnumerator nextObject]) != nil){
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSError *error = nil;
+            NSArray *fileList = [fileManager contentsOfDirectoryAtPath:ITCACHE_PATH error:&error];
+            for (NSString *fileName in fileList) {
                 NSString* fileAbsolutePath = [ITCACHE_PATH stringByAppendingPathComponent:fileName];
-                [manager removeItemAtPath:fileAbsolutePath error:nil];
+                [fileManager removeItemAtPath:fileAbsolutePath error:nil];
             }
+            
+            FMDatabase *db = [FMDatabase databaseWithPath:[DB_PATH stringByAppendingPathComponent:@"poketeastwind.db"]];
+            if ([db open])
+            {
+                [db beginTransaction];
+                [db executeUpdate:@"DELETE FROM news"];
+                [db executeUpdate:@"DELETE FROM update_log"];
+                [db commit];
+            }
+            [db close];
             
             [self.settingTableView reloadData];
         }
