@@ -11,6 +11,7 @@
 
 @interface CustomTabBarView : UIView
 @property(nonatomic,assign)id<CustomTabBarViewSelectedDelegate> selectedDelegate;
+@property(nonatomic,assign)int currentSelectedIndex;
 
 @end
 

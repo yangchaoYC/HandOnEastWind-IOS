@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface NavigationViewController : UIViewController
-- (IBAction)selectNavigation:(id)sender;
-
+@property (weak, nonatomic) IBOutlet UITableView *navigationTableView;
 @end

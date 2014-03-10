@@ -16,7 +16,6 @@
 #import "NewsCell.h"
 #import "NewsFocusCell.h"
 #import "UIImageView+WebCache.h"
-#import "AdView.h"
 
 @interface NewsViewController ()<UIScrollViewDelegate,NavigationScrollViewSlectedDelegate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)NSMutableArray *navigationsArray;
@@ -28,9 +27,6 @@
 @end
 
 @implementation NewsViewController
-{
-    CGPoint velocity_;
-}
 
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
 - (NSInteger)getNavID:(NSString *)navName_
@@ -65,7 +61,15 @@
 
 - (IBAction)chooseBtnClicked:(id)sender
 {
-    UIView *maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 20.0f, 320.0f, self.view.frame.size.height - 20.0f)];
+    CGFloat systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
+    UIView *maskView;
+    if (systemVersion < 7) {
+        maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0f, self.view.frame.size.height)];
+    }
+    else
+    {
+        maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 20.0f, 320.0f, self.view.frame.size.height - 20.0f)];
+    }
     maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.3f];
     maskView.tag = 99990;
     [self.view addSubview:maskView];
@@ -76,8 +80,15 @@
     UILabel *noticeLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 0, 100, 44)];
     noticeLabel.font = [UIFont boldSystemFontOfSize:18.0f];
     noticeLabel.textColor = [UIColor whiteColor];
+    noticeLabel.backgroundColor = [UIColor clearColor];
     noticeLabel.text = @"更多频道";
     [barView addSubview:noticeLabel];
+    
+    UIButton *closeMoreViewBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    closeMoreViewBtn.frame = CGRectMake(270.0f, 0, 50.0f, 44.0f);
+    [closeMoreViewBtn setImage:[UIImage imageNamed:@"news_detail_hook.png"] forState:UIControlStateNormal];
+    [closeMoreViewBtn addTarget:self action:@selector(removeMoreView) forControlEvents:UIControlEventTouchUpInside];
+    [barView addSubview:closeMoreViewBtn];
     
     UIView *navigationContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, 320.0f, 0)];
     navigationContainerView.backgroundColor = [UIColor whiteColor];
@@ -236,11 +247,6 @@
     [self removeMoreView];
 }
 
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-    velocity_ = velocity;
-}
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     if (scrollView == self.newsListContainer) {
@@ -265,15 +271,6 @@
     if (scrollView == self.newsListContainer) {
         if (decelerate) {
             self.newsListContainer.userInteractionEnabled = NO;
-        }
-        else
-        {
-            if (velocity_.x < 0) {
-                AdView *adView = [AdView sharedAdView:self.view.frame];
-                [UIView animateWithDuration:.5f animations:^{
-                    adView.frame = CGRectMake(0, 0, adView.frame.size.width, adView.frame.size.height);
-                }];
-            }
         }
     }
 }

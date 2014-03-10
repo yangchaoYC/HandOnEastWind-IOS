@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,49 +11,35 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4d2-jI-aGz">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_icon_nav.png" highlightedImage="btn_icon_nav2.png" translatesAutoresizingMaskIntoConstraints="NO" id="dlE-je-N4p">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="导航">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="btnClick:" destination="5PR-zl-0b0" eventType="touchUpInside" id="rNb-9I-6ub"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="38d-iq-xE1">
-                    <rect key="frame" x="80" y="0.0" width="80" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="新闻">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="btnClick:" destination="5PR-zl-0b0" eventType="touchUpInside" id="r6h-Jg-sei"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Owk-JY-yBm">
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <imageView tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_icon_share.png" highlightedImage="btn_icon_share2.png" translatesAutoresizingMaskIntoConstraints="NO" id="lwx-hC-K0I">
                     <rect key="frame" x="160" y="0.0" width="80" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="分享">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="btnClick:" destination="5PR-zl-0b0" eventType="touchUpInside" id="i0E-gi-25S"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WW8-9r-Nn2">
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <imageView tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_icon_site.png" highlightedImage="btn_icon_site2.png" translatesAutoresizingMaskIntoConstraints="NO" id="67V-cC-jen">
                     <rect key="frame" x="240" y="0.0" width="80" height="49"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="设置">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="btnClick:" destination="5PR-zl-0b0" eventType="touchUpInside" id="BN9-G0-egQ"/>
-                    </connections>
-                </button>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
+                <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="btn_icon_news.png" highlightedImage="btn_icon_news2.png" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3VH-Ff-mdK">
+                    <rect key="frame" x="80" y="0.0" width="80" height="49"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                </imageView>
             </subviews>
-            <color key="backgroundColor" red="1" green="0.054922041327293281" blue="0.16368310176604062" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.66666666666666663" green="0.50980392156862742" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
+    <resources>
+        <image name="btn_icon_nav.png" width="80" height="49"/>
+        <image name="btn_icon_nav2.png" width="160" height="98"/>
+        <image name="btn_icon_news.png" width="80" height="49"/>
+        <image name="btn_icon_news2.png" width="160" height="98"/>
+        <image name="btn_icon_share.png" width="80" height="49"/>
+        <image name="btn_icon_share2.png" width="160" height="98"/>
+        <image name="btn_icon_site.png" width="80" height="49"/>
+        <image name="btn_icon_site2.png" width="160" height="98"/>
+    </resources>
 </document>

@@ -80,7 +80,7 @@
             UISwitch *sw = [[UISwitch alloc] initWithFrame:CGRectMake(200, 0, 50, 30)];
             [sw addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
             sw.tag = 1;
-            [sw setOn:[self getHasImage]];
+            [sw setOn:![self getHasImage]];
             [cell.contentView addSubview:sw];
         }
             break;
@@ -210,6 +210,9 @@
             [db close];
             
             [self.settingTableView reloadData];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"清除缓存成功!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
         }
             break;
         case 5:
@@ -236,7 +239,7 @@
 {
     switch (switch_.tag) {
         case 1:
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:switch_.on] forKey:@"HASIMAGE"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:!switch_.on] forKey:@"HASIMAGE"];
             break;
         case 2:
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:switch_.on] forKey:@"HASPUSH"];

@@ -32,15 +32,13 @@
     
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBarHidden = YES;
-    
     self.hidesBottomBarWhenPushed = YES;
-	// Do any additional setup after loading the view.
-    //self.tabBar.hidden = YES;
     
     for (UIView *v in [self.view subviews]) {
         if ([v isKindOfClass:[UITabBar class]]) {
             CustomTabBarView *tabBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomTabBarView" owner:self options:nil] lastObject];
             tabBar.frame = self.tabBar.frame;
+            
             tabBar.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
             
             tabBar.selectedDelegate = self;
@@ -50,10 +48,10 @@
         }
     }
     
-    [self selectedTabBarAtIndex:1];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectNavigation:) name:@"SelectNavigation" object:nil];
     
-    UIView *adView = [AdView sharedAdView:self.view.frame];
+    AdView *adView = [AdView sharedAdView];
+    [adView setADViewImage];
     [self.view addSubview:adView];
     
     [UIView animateWithDuration:1.0f delay:3.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -66,6 +64,21 @@
 - (void)selectNavigation:(NSNotification *)notif
 {
     [self selectedTabBarAtIndex:1];
+    
+    for (UIView *v in [self.view subviews]) {
+        if ([v isKindOfClass:[CustomTabBarView class]]) {
+            for (UIImageView *item in [v subviews]) {
+                if (item.tag == 0) {
+                    [item setHighlighted:NO];
+                }
+                if (item.tag == 1) {
+                    [item setHighlighted:YES];
+                }
+            }
+            [(CustomTabBarView *)v setCurrentSelectedIndex:1];
+            break;
+        }
+    }
     
     for (UIViewController *controller in [self viewControllers]) {
         if ([controller isKindOfClass:[NewsViewController class]]) {

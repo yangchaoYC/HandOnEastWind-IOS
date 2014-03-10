@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface AdView : UIView
-+ (AdView *)sharedAdView:(CGRect)frame;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *adImageView;
++ (AdView *)sharedAdView;
+- (void)setADViewImage;
 @end

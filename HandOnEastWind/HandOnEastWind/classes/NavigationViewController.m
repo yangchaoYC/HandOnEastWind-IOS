@@ -8,9 +8,11 @@
 
 #import "NavigationViewController.h"
 #import "AppDelegate.h"
+#import "AdView.h"
+#import "NavigationCell.h"
 
-@interface NavigationViewController ()
-
+@interface NavigationViewController ()<UITableViewDataSource,UITableViewDelegate>
+@property(strong,nonatomic)NSArray *navigationsArray;
 @end
 
 @implementation NavigationViewController
@@ -27,7 +29,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    
+    self.navigationsArray = @[@"东风汽车报",@"东风",@"汽车之旅",@"汽车科技",@"装备维修技术"];
+    [self.navigationTableView reloadData];
+    
+    UISwipeGestureRecognizer *ges = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showADView:)];
+    ges.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.navigationTableView addGestureRecognizer:ges];
+}
+
+- (void)showADView:(UISwipeGestureRecognizer *)ges
+{
+    AdView *adView = [AdView sharedAdView];
+    [adView setADViewImage];
+    [UIView animateWithDuration:.5f animations:^{
+        adView.frame = CGRectMake(0, 0, adView.frame.size.width, adView.frame.size.height);
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,31 +54,35 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)selectNavigation:(id)sender
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    NSString *columName = @"";
-    switch ([sender tag]) {
-        case 0:
-            columName = @"东风汽车报";
-            break;
-        case 1:
-            columName = @"东风";
-            break;
-        case 2:
-            columName = @"汽车之旅";
-            break;
-        case 3:
-            columName = @"汽车科技";
-            break;
-        case 4:
-            columName = @"装备维修技术";
-            break;
-        default:
-            break;
+    return 95.0f;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.navigationsArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellID = @"NavigationCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"SelectNavigation" object:columName];
-
+    NavigationCell *navCell = (NavigationCell *)cell;
+    
+    navCell.titleLabel.text = [self.navigationsArray objectAtIndex:indexPath.row];
+    navCell.detailLabel.text = @"展示集团风采，弘扬精神文明";
+    navCell.iconImageView.image = [UIImage imageNamed:@"navigation_icon.png"];
+    return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SelectNavigation" object:[self.navigationsArray objectAtIndex:indexPath.row]];
+}
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "AdView.h"
+#import "AFHTTPRequestOperation.h"
 
 @implementation AdView
 {
@@ -24,12 +25,12 @@
     return self;
 }
 
-+ (AdView *)sharedAdView:(CGRect)frame
++ (AdView *)sharedAdView
 {
     static AdView *adView = nil;
     static dispatch_once_t predicate;
     dispatch_once(&predicate, ^{
-        adView = [[self alloc] initWithFrame:frame];
+        adView = [[[NSBundle mainBundle] loadNibNamed:@"ADView" owner:self options:nil] lastObject];
         adView.userInteractionEnabled = YES;
     });
     return adView;
@@ -72,6 +73,58 @@
             self.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         }];
     }
+}
+
+#define ITCACHE_PATH NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]
+- (void)setADViewImage
+{
+    //检查本地是否存在
+    NSDictionary *adConfig = [NSDictionary dictionaryWithContentsOfFile:[NSString stringWithFormat:@"%@/%@",ITCACHE_PATH,@"ADCONFIG"]];
+    if (adConfig) {
+        NSString *imagePath = [ITCACHE_PATH stringByAppendingPathComponent:@"ADIMAGE"];
+        self.adImageView.image = [UIImage imageWithContentsOfFile:imagePath];
+        self.titleLabel.text = [adConfig objectForKey:@"title"];
+    }
+    
+    //检查服务器的版本
+    NSString *currentVersion = [adConfig objectForKey:@"version"];
+    
+    NSString *urlString = @"http://zhangshangdongfeng.demo.evebit.com/mobile/adstart?nid=1136";
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    AFHTTPRequestOperation *request = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+    [request setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,id successObject){
+        id rs = [[NSJSONSerialization JSONObjectWithData:successObject options:NSJSONReadingAllowFragments error:nil] objectAtIndex:0];
+        NSString *serverVersion = [rs objectForKey:@"node_changed"];
+        if (![serverVersion isEqualToString:currentVersion]) {
+            [self downLoadADImage : serverVersion title:[rs objectForKey:@"node_title"] urlString:[rs objectForKey:@"field_thumbnails"]];
+        }
+        
+    }failure:^(AFHTTPRequestOperation *operation,NSError *error){
+        
+    }];
+    [request start];
+
+}
+
+- (void)downLoadADImage:(NSString *)serverVersion title:(NSString *)title urlString:(NSString *)imageURLString
+{
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:imageURLString]];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    NSString *path=[ITCACHE_PATH stringByAppendingPathComponent: @"ADIMAGE"];
+    operation.outputStream = [NSOutputStream outputStreamToFileAtPath:path append:NO];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //下载成功
+        NSDictionary *config = @{@"version": serverVersion,@"title":title};
+        [config writeToFile:[ITCACHE_PATH stringByAppendingPathComponent:@"ADCONFIG"] atomically:YES];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    
+    [operation start];
 }
 
 /*

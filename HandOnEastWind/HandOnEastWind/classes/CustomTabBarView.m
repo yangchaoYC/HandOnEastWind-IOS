@@ -19,6 +19,19 @@
     return self;
 }
 
+- (void)awakeFromNib
+{
+    self.currentSelectedIndex = 0;
+    for (UIImageView *item in [self subviews]) {
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemTap:)];
+        [item addGestureRecognizer:tap];
+        
+        if (item.tag == self.currentSelectedIndex) {
+            [item setHighlighted:YES];
+        }
+    }
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -28,9 +41,23 @@
 }
 */
 
--(IBAction)btnClick:(id)sender
+-(void)itemTap:(UITapGestureRecognizer *)ges
 {
-    [self.selectedDelegate selectedTabBarAtIndex:[sender tag]];
+    if (self.currentSelectedIndex != ges.view.tag) {
+        
+        for (UIImageView *item in [self subviews]) {
+            if (item.tag == self.currentSelectedIndex) {
+                [item setHighlighted:NO];
+            }
+            if (item.tag == ges.view.tag) {
+                [item setHighlighted:YES];
+            }
+        }
+        
+        [self.selectedDelegate selectedTabBarAtIndex:[ges.view tag]];
+        
+        self.currentSelectedIndex = ges.view.tag;
+    }
 }
 
 @end
