@@ -8,8 +8,10 @@
 
 #import "NavigationViewController.h"
 #import "AppDelegate.h"
-#import "AdView.h"
 #import "NavigationCell.h"
+#import "AppDelegate.h"
+#import "ADWindow.h"
+#import "PartnersAlertWindow.h"
 
 @interface NavigationViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(strong,nonatomic)NSArray *navigationsArray;
@@ -41,10 +43,10 @@
 
 - (void)showADView:(UISwipeGestureRecognizer *)ges
 {
-    AdView *adView = [AdView sharedAdView];
-    [adView setADViewImage];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    ADWindow *adWindow = [appDelegate adWindow];
     [UIView animateWithDuration:.5f animations:^{
-        adView.frame = CGRectMake(0, 0, adView.frame.size.width, adView.frame.size.height);
+        adWindow.frame = CGRectMake(0, 0, adWindow.frame.size.width, adWindow.frame.size.height);
     }];
 }
 
@@ -85,4 +87,9 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"SelectNavigation" object:[self.navigationsArray objectAtIndex:indexPath.row]];
 }
 
+- (IBAction)showPartners:(id)sender
+{
+    PartnersAlertWindow *alertView = [[PartnersAlertWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [alertView show];
+}
 @end

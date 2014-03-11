@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "FMDatabase.h"
 #import <ShareSDK/ShareSDK.h>
+#import "ADWindow.h"
+#import "ADViewController.h"
 
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
 
@@ -16,6 +18,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.adWindow = [[ADWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.adWindow.windowLevel = UIWindowLevelStatusBar + 1;
+    ADViewController *controller = [[ADViewController alloc] initWithNibName:@"ADViewController" bundle:nil];
+    self.adWindow.rootViewController = controller;
+    self.adWindow.hidden = NO;
+    [self.adWindow makeKeyAndVisible];
+    
+    [UIView animateWithDuration:1.0f delay:2.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.adWindow.frame = CGRectMake(-1 * self.adWindow.frame.size.width, self.adWindow.frame.origin.y,
+                                         self.adWindow.frame.size.width, self.adWindow.frame.size.height);
+    }completion:^(BOOL completion){
+        [controller updateAD];
+    }];
+    
     // Override point for customization after application launch.
     [self initDatabase];
     
