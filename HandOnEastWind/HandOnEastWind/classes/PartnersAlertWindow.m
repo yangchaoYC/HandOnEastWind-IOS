@@ -12,14 +12,21 @@
 #import "AFHTTPRequestOperation.h"
 #import "UIImageView+WebCache.h"
 
-@interface PartnersAlertWindow()<UITableViewDelegate,UITableViewDataSource>
+#import "MJRefresh.h"
+
+@interface PartnersAlertWindow()<UITableViewDelegate,UITableViewDataSource,MJRefreshBaseViewDelegate>
 @property(nonatomic,strong)AFHTTPRequestOperation *request;
 @property(nonatomic,strong)UITableView *partnersTableView;
 @property(nonatomic,strong)NSMutableArray *partnersDataArray;
-@property(nonatomic,strong)UIActivityIndicatorView *loadingTagView;
+
+@property(nonatomic,strong)MJRefreshHeaderView *refreshHeaderView;
+@property(nonatomic,strong)MJRefreshFooterView *refreshFooterView;
 @end
 
 @implementation PartnersAlertWindow
+{
+    int currentPage_;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -37,16 +44,21 @@
         self.partnersTableView.layer.borderColor = [UIColor colorWithRed:170.0f / 255.0f green:130.0f / 255.0f blue:60.0f / 255.0f alpha:1].CGColor;
         [self addSubview:self.partnersTableView];
         
-        self.loadingTagView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 37, 37)];
-        self.loadingTagView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-        self.loadingTagView.hidden = YES;
-        [self insertSubview:self.loadingTagView aboveSubview:self.partnersTableView];
-        self.loadingTagView.center = self.partnersTableView.center;
-        
         UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeInfoDark];
         closeBtn.frame = CGRectMake(320.0 - gap - 22 - 2, gap + 2, 22, 22);
         [closeBtn addTarget:self action:@selector(hide:) forControlEvents:UIControlEventTouchUpInside];
         [self insertSubview:closeBtn aboveSubview:self.partnersTableView];
+        
+        self.refreshHeaderView = [MJRefreshHeaderView header];
+        self.refreshHeaderView.delegate = self;
+        self.refreshHeaderView.scrollView = self.partnersTableView;
+        self.refreshHeaderView.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+            [self refreshData];
+        };
+        
+        self.refreshFooterView = [MJRefreshFooterView footer];
+        self.refreshFooterView.delegate = self;
+        self.refreshFooterView.scrollView = self.partnersTableView;
     }
     return self;
 }
@@ -79,7 +91,7 @@
     return cell;
 }
 
-#define PARTNERS_REQUEST_URL @"http://zhangshangdongfeng.demo.evebit.com/mobile/partners"
+#define PARTNERS_REQUEST_URL @"http://zhangshangdongfeng.demo.evebit.com/mobile/partners?page=%d"
 - (void)show
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -88,25 +100,7 @@
     self.hidden = NO;
     [self makeKeyAndVisible];
     
-    self.partnersDataArray = [NSMutableArray array];
-    
-    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:PARTNERS_REQUEST_URL]];
-    self.request = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-    [self.request setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,id successObject){
-        //{"nid":"1285","node_title":"\u6728\u5170\u5c71\u666f\u533a","node_created":"1394444629","field_thumbnails":"http://zhangshangdongfeng.demo.evebit.com/sites/default/files/qq20140310-12x.png"}
-        
-        id rs = [NSJSONSerialization JSONObjectWithData:successObject options:NSJSONReadingAllowFragments error:nil];
-        self.partnersDataArray = rs;
-        [self.partnersTableView reloadData];
-        self.loadingTagView.hidden = YES;
-        
-    }failure:^(AFHTTPRequestOperation *operation,NSError *error){
-        self.loadingTagView.hidden = YES;
-    }];
-    
-    self.loadingTagView.hidden = NO;
-    [self.loadingTagView startAnimating];
-    [self.request start];
+    [self.refreshHeaderView beginRefreshing];
 }
 
 - (void)hide:(id)sender
@@ -116,13 +110,59 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.alertViewCache = nil;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+
+- (void)aaa
 {
-    // Drawing code
+    [self.refreshHeaderView endRefreshing];
 }
-*/
+
+- (void)refreshData
+{
+    self.partnersDataArray = [NSMutableArray array];
+    NSString *urlString = [NSString stringWithFormat:PARTNERS_REQUEST_URL,0];
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    self.request = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+    [self.request setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,id successObject){
+        //{"nid":"1285","node_title":"\u6728\u5170\u5c71\u666f\u533a","node_created":"1394444629","field_thumbnails":"http://zhangshangdongfeng.demo.evebit.com/sites/default/files/qq20140310-12x.png"}
+        
+        id rs = [NSJSONSerialization JSONObjectWithData:successObject options:NSJSONReadingAllowFragments error:nil];
+        self.partnersDataArray = [NSMutableArray arrayWithArray:rs];
+        
+        currentPage_ = 1;
+        
+        [self.partnersTableView reloadData];
+
+        
+    }failure:^(AFHTTPRequestOperation *operation,NSError *error){
+        
+    }];
+    
+    [self.request start];
+}
+
+- (void)loadMoreData
+{
+    NSString *urlString = [NSString stringWithFormat:PARTNERS_REQUEST_URL,currentPage_];
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
+    self.request = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+    [self.request setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,id successObject){
+        //{"nid":"1285","node_title":"\u6728\u5170\u5c71\u666f\u533a","node_created":"1394444629","field_thumbnails":"http://zhangshangdongfeng.demo.evebit.com/sites/default/files/qq20140310-12x.png"}
+        
+        id rs = [NSJSONSerialization JSONObjectWithData:successObject options:NSJSONReadingAllowFragments error:nil];
+        for (int i=0; i<[rs count]; i++) {
+            [self.partnersDataArray addObject:[rs objectAtIndex:i]];
+        }
+        [self.partnersDataArray addObjectsFromArray:rs];
+        [self.partnersTableView reloadData];
+        [self.refreshHeaderView endRefreshing];
+        
+        currentPage_ ++;
+        
+    }failure:^(AFHTTPRequestOperation *operation,NSError *error){
+        
+    }];
+    
+    [self.request start];
+}
 
 @end

@@ -10,8 +10,11 @@
 #import "MJRefreshConst.h"
 
 @interface MJRefreshFooterView()
+//{
+//    BOOL _withoutIdle;
+//}
 {
-    BOOL _withoutIdle;
+    int _lastRefreshCount;
 }
 @end
 
@@ -116,7 +119,8 @@
             CGFloat deltaH = [self contentBreakView];
             CGPoint tempOffset;
             
-            if (MJRefreshStateRefreshing == oldState && deltaH > 0 && !_withoutIdle) {
+            int currentCount = [self totalDataCountInScrollView];
+            if (MJRefreshStateRefreshing == oldState && deltaH > 0 && currentCount != _lastRefreshCount) {
                 tempOffset = _scrollView.contentOffset;
                 animDuration = 0;
             }
@@ -136,6 +140,9 @@
             
         case MJRefreshStateRefreshing:
         {
+            // 记录刷新前的数量
+            _lastRefreshCount = [self totalDataCountInScrollView];
+            
             _statusLabel.text = MJRefreshFooterRefreshing;
             _arrowImage.transform = CGAffineTransformMakeRotation(M_PI);
             [UIView animateWithDuration:MJRefreshAnimationDuration animations:^{
@@ -156,12 +163,12 @@
 	}
 }
 
-- (void)endRefreshingWithoutIdle
-{
-    _withoutIdle = YES;
-    [self endRefreshing];
-    _withoutIdle = NO;
-}
+//- (void)endRefreshingWithoutIdle
+//{
+//    _withoutIdle = YES;
+//    [self endRefreshing];
+//    _withoutIdle = NO;
+//}
 
 #pragma mark 获得scrollView的内容 超出 view 的高度
 - (CGFloat)contentBreakView

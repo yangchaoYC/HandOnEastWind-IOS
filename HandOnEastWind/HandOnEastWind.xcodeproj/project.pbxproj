@@ -55,6 +55,11 @@
 		3BFD6C5718C329630073F502 /* news_template.html in Resources */ = {isa = PBXBuildFile; fileRef = 3BFD6C5618C329630073F502 /* news_template.html */; };
 		6E0B67F218CED31400D8B74B /* PartnersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B67F118CED31400D8B74B /* PartnersCell.m */; };
 		6E0B67F418CED32B00D8B74B /* PartnersCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B67F318CED32B00D8B74B /* PartnersCell.xib */; };
+		6E0B680018CF03B100D8B74B /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B67F618CF03B100D8B74B /* MJRefresh.bundle */; };
+		6E0B680118CF03B100D8B74B /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B67F918CF03B100D8B74B /* MJRefreshBaseView.m */; };
+		6E0B680218CF03B100D8B74B /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B67FB18CF03B100D8B74B /* MJRefreshConst.m */; };
+		6E0B680318CF03B100D8B74B /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B67FD18CF03B100D8B74B /* MJRefreshFooterView.m */; };
+		6E0B680418CF03B100D8B74B /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B67FF18CF03B100D8B74B /* MJRefreshHeaderView.m */; };
 		6E18A4B218CD5D80005431A4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E18A4B118CD5D80005431A4 /* SystemConfiguration.framework */; };
 		6E18A4B418CD5D8F005431A4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E18A4B318CD5D8F005431A4 /* QuartzCore.framework */; };
 		6E18A4B618CD5D9F005431A4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E18A4B518CD5D9F005431A4 /* CoreTelephony.framework */; };
@@ -243,6 +248,16 @@
 		6E0B67F018CED31400D8B74B /* PartnersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartnersCell.h; sourceTree = "<group>"; };
 		6E0B67F118CED31400D8B74B /* PartnersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartnersCell.m; sourceTree = "<group>"; };
 		6E0B67F318CED32B00D8B74B /* PartnersCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PartnersCell.xib; sourceTree = "<group>"; };
+		6E0B67F618CF03B100D8B74B /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
+		6E0B67F718CF03B100D8B74B /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
+		6E0B67F818CF03B100D8B74B /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
+		6E0B67F918CF03B100D8B74B /* MJRefreshBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBaseView.m; sourceTree = "<group>"; };
+		6E0B67FA18CF03B100D8B74B /* MJRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshConst.h; sourceTree = "<group>"; };
+		6E0B67FB18CF03B100D8B74B /* MJRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshConst.m; sourceTree = "<group>"; };
+		6E0B67FC18CF03B100D8B74B /* MJRefreshFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshFooterView.h; sourceTree = "<group>"; };
+		6E0B67FD18CF03B100D8B74B /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
+		6E0B67FE18CF03B100D8B74B /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
+		6E0B67FF18CF03B100D8B74B /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
 		6E18A4B118CD5D80005431A4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6E18A4B318CD5D8F005431A4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6E18A4B518CD5D9F005431A4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -491,6 +506,7 @@
 		3B7CD26518B9D4F300EC1975 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				6E0B67F518CF03B100D8B74B /* MJRefresh */,
 				711DF7DD18CEF6BD0018E9FA /* ShareSDK */,
 				3B28FD9A18B9FAB100E1D5B1 /* EGOTableViewPullRefresh */,
 			);
@@ -675,6 +691,23 @@
 				6E0B67F318CED32B00D8B74B /* PartnersCell.xib */,
 			);
 			path = classes;
+			sourceTree = "<group>";
+		};
+		6E0B67F518CF03B100D8B74B /* MJRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				6E0B67F618CF03B100D8B74B /* MJRefresh.bundle */,
+				6E0B67F718CF03B100D8B74B /* MJRefresh.h */,
+				6E0B67F818CF03B100D8B74B /* MJRefreshBaseView.h */,
+				6E0B67F918CF03B100D8B74B /* MJRefreshBaseView.m */,
+				6E0B67FA18CF03B100D8B74B /* MJRefreshConst.h */,
+				6E0B67FB18CF03B100D8B74B /* MJRefreshConst.m */,
+				6E0B67FC18CF03B100D8B74B /* MJRefreshFooterView.h */,
+				6E0B67FD18CF03B100D8B74B /* MJRefreshFooterView.m */,
+				6E0B67FE18CF03B100D8B74B /* MJRefreshHeaderView.h */,
+				6E0B67FF18CF03B100D8B74B /* MJRefreshHeaderView.m */,
+			);
+			path = MJRefresh;
 			sourceTree = "<group>";
 		};
 		711DF7DD18CEF6BD0018E9FA /* ShareSDK */ = {
@@ -974,6 +1007,7 @@
 				6E18A4F718CDADD2005431A4 /* navigation_icon@2x.png in Resources */,
 				711DF87418CEF7D10018E9FA /* btn_icon_news2@2x.png in Resources */,
 				711DF85218CEF6BD0018E9FA /* Resource.bundle in Resources */,
+				6E0B680018CF03B100D8B74B /* MJRefresh.bundle in Resources */,
 				3B7CD26B18B9D78700EC1975 /* navigations.txt in Resources */,
 				3B28FDB318B9FAB100E1D5B1 /* blueArrow.png in Resources */,
 				711DF86518CEF6BE0018E9FA /* ShareSDKiPadDefaultShareViewUI.bundle in Resources */,
@@ -1059,14 +1093,18 @@
 				3B7CD26218B9C2C100EC1975 /* CustomTabBarView.m in Sources */,
 				3B9F1AE818B8D7B7007FD82E /* SharedViewController.m in Sources */,
 				6E0B67F218CED31400D8B74B /* PartnersCell.m in Sources */,
+				6E0B680418CF03B100D8B74B /* MJRefreshHeaderView.m in Sources */,
 				3B28FDAD18B9FAB100E1D5B1 /* EGORefreshTableHeaderView.m in Sources */,
+				6E0B680318CF03B100D8B74B /* MJRefreshFooterView.m in Sources */,
 				3B834D5918B888F900AA5876 /* HomeViewController.m in Sources */,
 				3B9F1AEE18B8D90F007FD82E /* NewsDetailsViewController.m in Sources */,
+				6E0B680118CF03B100D8B74B /* MJRefreshBaseView.m in Sources */,
 				3BB0646D18CB06CF00F09ADD /* NewsViewController.m in Sources */,
 				3B9F1AEB18B8D7CD007FD82E /* SettingViewController.m in Sources */,
 				6E18A4FD18CEAF09005431A4 /* ADViewController.m in Sources */,
 				3B574E9018C1C10400C6F6FC /* NewsFocusCell.m in Sources */,
 				6E18A50418CECF46005431A4 /* PartnersAlertWindow.m in Sources */,
+				6E0B680218CF03B100D8B74B /* MJRefreshConst.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
