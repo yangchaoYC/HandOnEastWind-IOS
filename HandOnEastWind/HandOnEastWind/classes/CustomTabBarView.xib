@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -35,10 +35,10 @@
     <resources>
         <image name="btn_icon_nav.png" width="80" height="49"/>
         <image name="btn_icon_nav2.png" width="160" height="98"/>
-        <image name="btn_icon_news.png" width="80" height="49"/>
-        <image name="btn_icon_news2.png" width="160" height="98"/>
-        <image name="btn_icon_share.png" width="80" height="49"/>
-        <image name="btn_icon_share2.png" width="160" height="98"/>
+        <image name="btn_icon_news.png" width="79" height="49"/>
+        <image name="btn_icon_news2.png" width="79" height="49"/>
+        <image name="btn_icon_share.png" width="79" height="49"/>
+        <image name="btn_icon_share2.png" width="79" height="49"/>
         <image name="btn_icon_site.png" width="80" height="49"/>
         <image name="btn_icon_site2.png" width="160" height="98"/>
     </resources>
