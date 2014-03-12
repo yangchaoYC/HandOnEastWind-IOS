@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface NewsADAlertWindow : UIWindow
-- (void)show;
+- (void)show:(NSString *)key;
 - (void)hide;
 @end

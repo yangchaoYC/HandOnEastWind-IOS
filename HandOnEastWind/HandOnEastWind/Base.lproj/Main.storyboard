@@ -25,10 +25,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7Ou-gk-oBk">
-                                        <rect key="frame" x="203" y="7" width="97" height="30"/>
+                                        <rect key="frame" x="203" y="9" width="102" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <state key="normal" title="战略合作伙伴">
+                                        <state key="normal" title="战略合作伙伴" backgroundImage="btn_partners.png">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -273,11 +273,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" id="NNN-Wv-Ayq">
-                                                <rect key="frame" x="290" y="11" width="22" height="22"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NNN-Wv-Ayq">
+                                                <rect key="frame" x="286" y="7" width="30" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <state key="normal">
+                                                <state key="normal" image="btn_more.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -324,6 +324,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="btn_more.png" width="30" height="30"/>
+        <image name="btn_partners.png" width="102" height="25"/>
         <image name="news_detail_back.png" width="63" height="44"/>
         <image name="news_detail_share.png" width="61" height="44"/>
     </resources>

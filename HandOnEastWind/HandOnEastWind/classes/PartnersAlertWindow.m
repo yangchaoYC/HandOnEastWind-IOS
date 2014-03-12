@@ -43,8 +43,9 @@
         self.partnersTableView.layer.borderColor = [UIColor colorWithRed:170.0f / 255.0f green:130.0f / 255.0f blue:60.0f / 255.0f alpha:1].CGColor;
         [self addSubview:self.partnersTableView];
         
-        UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeInfoDark];
-        closeBtn.frame = CGRectMake(320.0 - gap - 22 - 2, gap + 2, 22, 22);
+        UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [closeBtn setImage:[UIImage imageNamed:@"btn_close.png"] forState:UIControlStateNormal];
+        closeBtn.frame = CGRectMake(320.0 - gap - 33 - 2, gap + 2, 33, 33);
         [closeBtn addTarget:self action:@selector(hide:) forControlEvents:UIControlEventTouchUpInside];
         [self insertSubview:closeBtn aboveSubview:self.partnersTableView];
     }
@@ -79,7 +80,7 @@
     return cell;
 }
 
-#define PARTNERS_REQUEST_URL @"http://zhangshangdongfeng.demo.evebit.com/mobile/partners?page=%d"
+#define PARTNERS_REQUEST_URL [BASE_URL stringByAppendingString:@"mobile/partners?page=%d"]
 - (void)show
 {
     __weak PartnersAlertWindow *safe_self = self;
@@ -143,8 +144,6 @@
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     self.request = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
     [self.request setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,id successObject){
-        //{"nid":"1285","node_title":"\u6728\u5170\u5c71\u666f\u533a","node_created":"1394444629","field_thumbnails":"http://zhangshangdongfeng.demo.evebit.com/sites/default/files/qq20140310-12x.png"}
-        
         id rs = [NSJSONSerialization JSONObjectWithData:successObject options:NSJSONReadingAllowFragments error:nil];
         [safe_self.partnersDataArray addObjectsFromArray:rs];
         [safe_self.partnersTableView reloadData];
@@ -161,10 +160,13 @@
 - (void)dealloc
 {
     self.request = nil;
+    /*
     self.partnersTableView = nil;
     self.partnersDataArray = nil;
     self.refreshHeaderView = nil;
     self.refreshFooterView = nil;
+     */
+    
 }
 
 @end

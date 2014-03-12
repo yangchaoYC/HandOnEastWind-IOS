@@ -26,7 +26,6 @@
     return self;
 }
 
-#define URL_BASE @"http://zhangshangdongfeng.demo.evebit.com"
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -36,7 +35,7 @@
     self.changeFontsizeControl.selectedSegmentIndex = fontSize;
     
     //加载本地模版
-    NSURL *baseURL = [NSURL URLWithString:URL_BASE];
+    NSURL *baseURL = [NSURL URLWithString:BASE_URL];
     NSString *path = [[NSBundle mainBundle] pathForResource:@"news_template" ofType:@"html"];
     NSString *html = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     

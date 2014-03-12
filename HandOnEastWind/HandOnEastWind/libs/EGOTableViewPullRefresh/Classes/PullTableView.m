@@ -31,7 +31,7 @@
 #import "NewsModel.h"
 
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
-#define REQUEST_URL @"http://zhangshangdongfeng.demo.evebit.com/mobile/news/?field_channel_tid=%d&page=%d"
+#define REQUEST_URL [BASE_URL stringByAppendingString:@"mobile/news/?field_channel_tid=%d&page=%d"]
 #define CHANNEL_CACHE_MAX [NSNumber numberWithInt:200]
 
 @interface PullTableView (Private) <UIScrollViewDelegate,PullTableViewDelegate>

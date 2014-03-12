@@ -205,6 +205,7 @@
                 [db beginTransaction];
                 [db executeUpdate:@"DELETE FROM news"];
                 [db executeUpdate:@"DELETE FROM update_log"];
+                [db executeUpdate:@"UPDATE ad_cache SET node_changed = 0 ,field_thumbnails = ''"];
                 [db commit];
             }
             [db close];

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ADWindow : UIWindow
-
+- (void)show;
+- (void)updateAD;
 @end

@@ -214,7 +214,7 @@
     
     //显示广告
     NewsADAlertWindow *alertView = [[NewsADAlertWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [alertView show];
+    [alertView show:columnName];
 }
 
 - (void)viewDidLoad

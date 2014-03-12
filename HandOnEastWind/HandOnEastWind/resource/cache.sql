@@ -46,3 +46,11 @@ INSERT INTO nav_id_map (nav_id_mapid,nav_name,nav_id) VALUES (36,'技术改造',
 INSERT INTO nav_id_map (nav_id_mapid,nav_name,nav_id) VALUES (37,'节能技术',51);
 INSERT INTO nav_id_map (nav_id_mapid,nav_name,nav_id) VALUES (38,'汽车研究',52);
 
+CREATE TABLE ad_cache (ad_cacheid INTEGER PRIMARY KEY AUTOINCREMENT, nid INTEGER, node_changed NUMERIC, node_title TEXT, field_thumbnails TEXT);
+
+INSERT INTO ad_cache (ad_cacheid,nid,node_changed,node_title,field_thumbnails) VALUES (1,1136,0,'软件启动','');
+INSERT INTO ad_cache (ad_cacheid,nid,node_changed,node_title,field_thumbnails) VALUES (2,1160,0,'东风汽车报','');
+INSERT INTO ad_cache (ad_cacheid,nid,node_changed,node_title,field_thumbnails) VALUES (3,1161,0,'东风','');
+INSERT INTO ad_cache (ad_cacheid,nid,node_changed,node_title,field_thumbnails) VALUES (4,1162,0,'汽车之旅','');
+INSERT INTO ad_cache (ad_cacheid,nid,node_changed,node_title,field_thumbnails) VALUES (5,1163,0,'汽车科技','');
+INSERT INTO ad_cache (ad_cacheid,nid,node_changed,node_title,field_thumbnails) VALUES (6,1164,0,'装备维修技术','');
