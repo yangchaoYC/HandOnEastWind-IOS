@@ -107,6 +107,12 @@
             // 设置文字
 			_statusLabel.text = MJRefreshHeaderPullToRefresh;
             // 执行动画
+            
+            //colin
+            _scrollViewInitInset.top = 0;
+            ////////colin
+            _scrollView.contentSize = CGSizeMake(_scrollView.contentSize.width, [self totalDataCountInScrollView] * 110.0f);
+            
             [UIView animateWithDuration:MJRefreshAnimationDuration animations:^{
                 _arrowImage.transform = CGAffineTransformIdentity;
                 UIEdgeInsets inset = _scrollView.contentInset;

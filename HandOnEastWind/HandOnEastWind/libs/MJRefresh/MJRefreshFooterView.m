@@ -123,6 +123,9 @@
             if (MJRefreshStateRefreshing == oldState && deltaH > 0 && currentCount != _lastRefreshCount) {
                 tempOffset = _scrollView.contentOffset;
                 animDuration = 0;
+                
+                ////////colin
+                _scrollView.contentSize = CGSizeMake(_scrollView.contentSize.width, currentCount * 110.0f);
             }
             
             [UIView animateWithDuration:animDuration animations:^{

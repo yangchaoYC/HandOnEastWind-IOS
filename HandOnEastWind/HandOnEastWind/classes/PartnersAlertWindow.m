@@ -21,12 +21,11 @@
 
 @property(nonatomic,strong)MJRefreshHeaderView *refreshHeaderView;
 @property(nonatomic,strong)MJRefreshFooterView *refreshFooterView;
+
+@property(nonatomic,assign)int currentPage;
 @end
 
 @implementation PartnersAlertWindow
-{
-    int currentPage_;
-}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -48,17 +47,6 @@
         closeBtn.frame = CGRectMake(320.0 - gap - 22 - 2, gap + 2, 22, 22);
         [closeBtn addTarget:self action:@selector(hide:) forControlEvents:UIControlEventTouchUpInside];
         [self insertSubview:closeBtn aboveSubview:self.partnersTableView];
-        
-        self.refreshHeaderView = [MJRefreshHeaderView header];
-        self.refreshHeaderView.delegate = self;
-        self.refreshHeaderView.scrollView = self.partnersTableView;
-        self.refreshHeaderView.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
-            [self refreshData];
-        };
-        
-        self.refreshFooterView = [MJRefreshFooterView footer];
-        self.refreshFooterView.delegate = self;
-        self.refreshFooterView.scrollView = self.partnersTableView;
     }
     return self;
 }
@@ -94,13 +82,28 @@
 #define PARTNERS_REQUEST_URL @"http://zhangshangdongfeng.demo.evebit.com/mobile/partners?page=%d"
 - (void)show
 {
+    __weak PartnersAlertWindow *safe_self = self;
+
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.alertViewCache = self;
     
     self.hidden = NO;
     [self makeKeyAndVisible];
     
+    self.refreshHeaderView = [MJRefreshHeaderView header];
+    self.refreshHeaderView.delegate = self;
+    self.refreshHeaderView.scrollView = self.partnersTableView;
+    self.refreshHeaderView.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        [safe_self refreshData];
+    };
     [self.refreshHeaderView beginRefreshing];
+    
+    self.refreshFooterView = [MJRefreshFooterView footer];
+    self.refreshFooterView.delegate = self;
+    self.refreshFooterView.scrollView = self.partnersTableView;
+    self.refreshFooterView.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView){
+        [safe_self loadMoreData];
+    };
 }
 
 - (void)hide:(id)sender
@@ -111,30 +114,22 @@
     appDelegate.alertViewCache = nil;
 }
 
-- (void)aaa
-{
-    [self.refreshHeaderView endRefreshing];
-}
-
 - (void)refreshData
 {
-    self.partnersDataArray = [NSMutableArray array];
+    __weak PartnersAlertWindow *safe_self = self;
+    
     NSString *urlString = [NSString stringWithFormat:PARTNERS_REQUEST_URL,0];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     self.request = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
     [self.request setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,id successObject){
-        //{"nid":"1285","node_title":"\u6728\u5170\u5c71\u666f\u533a","node_created":"1394444629","field_thumbnails":"http://zhangshangdongfeng.demo.evebit.com/sites/default/files/qq20140310-12x.png"}
-        
         id rs = [NSJSONSerialization JSONObjectWithData:successObject options:NSJSONReadingAllowFragments error:nil];
-        self.partnersDataArray = [NSMutableArray arrayWithArray:rs];
-        
-        currentPage_ = 1;
-        
-        [self.partnersTableView reloadData];
-
+        safe_self.partnersDataArray = [NSMutableArray arrayWithArray:rs];
+        safe_self.currentPage = 1;
+        [safe_self.partnersTableView reloadData];
+        [safe_self.refreshHeaderView endRefreshing];
         
     }failure:^(AFHTTPRequestOperation *operation,NSError *error){
-        
+        [safe_self.refreshHeaderView endRefreshing];
     }];
     
     [self.request start];
@@ -142,27 +137,34 @@
 
 - (void)loadMoreData
 {
-    NSString *urlString = [NSString stringWithFormat:PARTNERS_REQUEST_URL,currentPage_];
+    __weak PartnersAlertWindow *safe_self = self;
+
+    NSString *urlString = [NSString stringWithFormat:PARTNERS_REQUEST_URL,safe_self.currentPage];
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
     self.request = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
     [self.request setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,id successObject){
         //{"nid":"1285","node_title":"\u6728\u5170\u5c71\u666f\u533a","node_created":"1394444629","field_thumbnails":"http://zhangshangdongfeng.demo.evebit.com/sites/default/files/qq20140310-12x.png"}
         
         id rs = [NSJSONSerialization JSONObjectWithData:successObject options:NSJSONReadingAllowFragments error:nil];
-        for (int i=0; i<[rs count]; i++) {
-            [self.partnersDataArray addObject:[rs objectAtIndex:i]];
-        }
-        [self.partnersDataArray addObjectsFromArray:rs];
-        [self.partnersTableView reloadData];
-        [self.refreshHeaderView endRefreshing];
-        
-        currentPage_ ++;
+        [safe_self.partnersDataArray addObjectsFromArray:rs];
+        [safe_self.partnersTableView reloadData];
+        [safe_self.refreshFooterView endRefreshing];
+        safe_self.currentPage ++;
         
     }failure:^(AFHTTPRequestOperation *operation,NSError *error){
-        
+        [safe_self.refreshFooterView endRefreshing];
     }];
     
     [self.request start];
+}
+
+- (void)dealloc
+{
+    self.request = nil;
+    self.partnersTableView = nil;
+    self.partnersDataArray = nil;
+    self.refreshHeaderView = nil;
+    self.refreshFooterView = nil;
 }
 
 @end

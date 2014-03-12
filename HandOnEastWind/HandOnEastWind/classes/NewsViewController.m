@@ -16,6 +16,7 @@
 #import "NewsCell.h"
 #import "NewsFocusCell.h"
 #import "UIImageView+WebCache.h"
+#import "NewsADAlertWindow.h"
 
 @interface NewsViewController ()<UIScrollViewDelegate,NavigationScrollViewSlectedDelegate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)NSMutableArray *navigationsArray;
@@ -210,6 +211,10 @@
         
         [self.navigationScrollView selectNavigationAtIndex:self.currentSelectedNavIndex];
     }
+    
+    //显示广告
+    NewsADAlertWindow *alertView = [[NewsADAlertWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [alertView show];
 }
 
 - (void)viewDidLoad

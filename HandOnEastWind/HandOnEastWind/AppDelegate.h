@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 @class ADWindow;
-@class PartnersAlertWindow;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -16,5 +15,5 @@
 
 @property (strong, nonatomic) ADWindow *adWindow;
 
-@property (strong, nonatomic) PartnersAlertWindow *alertViewCache;
+@property (strong, nonatomic) UIWindow *alertViewCache;
 @end
