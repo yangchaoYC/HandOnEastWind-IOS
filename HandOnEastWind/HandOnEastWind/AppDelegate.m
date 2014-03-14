@@ -29,7 +29,7 @@
         self.adWindow.frame = CGRectMake(-1 * self.adWindow.frame.size.width, self.adWindow.frame.origin.y,
                                          self.adWindow.frame.size.width, self.adWindow.frame.size.height);
     }completion:^(BOOL completion){
-        [self.adWindow updateAD];
+        [self.adWindow show];
     }];
     
     [ShareSDK registerApp:@"15415d0dd348"];

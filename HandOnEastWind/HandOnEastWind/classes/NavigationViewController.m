@@ -45,6 +45,7 @@
 {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     ADWindow *adWindow = [appDelegate adWindow];
+    [adWindow show];
     [UIView animateWithDuration:.5f animations:^{
         adWindow.frame = CGRectMake(0, 0, adWindow.frame.size.width, adWindow.frame.size.height);
     }];

@@ -13,6 +13,7 @@
 
 #define ITCACHE_PATH NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
+#define AD_CACHE_PATH [ITCACHE_PATH stringByAppendingPathComponent:@"AD_CACHE"]
 
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -108,7 +109,7 @@
         {
             titleLabel.text = @"清除缓存";
             
-            long long imageCacheSize = [self folderSizeAtPath:[[ITCACHE_PATH stringByAppendingPathComponent:@"com.hackemist.SDWebImageCache.default"] cStringUsingEncoding:NSUTF8StringEncoding]];
+            long long imageCacheSize = [self folderSizeAtPath:[[ITCACHE_PATH stringByAppendingPathComponent:@"com.hackemist.SDWebImageCache.default"] cStringUsingEncoding:NSUTF8StringEncoding]] + [self folderSizeAtPath:[AD_CACHE_PATH cStringUsingEncoding:NSUTF8StringEncoding]];
             
             long long sumSize = imageCacheSize;
             
@@ -198,6 +199,13 @@
                 NSString* fileAbsolutePath = [ITCACHE_PATH stringByAppendingPathComponent:fileName];
                 [fileManager removeItemAtPath:fileAbsolutePath error:nil];
             }
+            
+            fileList = [fileManager contentsOfDirectoryAtPath:AD_CACHE_PATH error:&error];
+            for (NSString *fileName in fileList) {
+                NSString* fileAbsolutePath = [AD_CACHE_PATH stringByAppendingPathComponent:fileName];
+                [fileManager removeItemAtPath:fileAbsolutePath error:nil];
+            }
+ 
             
             FMDatabase *db = [FMDatabase databaseWithPath:[DB_PATH stringByAppendingPathComponent:@"poketeastwind.db"]];
             if ([db open])

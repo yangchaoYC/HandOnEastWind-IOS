@@ -7,14 +7,12 @@
 //
 
 #import "NewsADAlertWindow.h"
-#import "UIImageView+WebCache.h"
 #import "AppDelegate.h"
 #import "FMDatabase.h"
-#import "AFHTTPRequestOperation.h"
+#import "ADDownLoadManager.h"
 
 @interface NewsADAlertWindow()
 @property(nonatomic,strong)UIImageView *newsADImageView;
-@property(nonatomic,strong)AFHTTPRequestOperation *request;
 @end
 
 @implementation NewsADAlertWindow
@@ -45,10 +43,10 @@
 }
 
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
-#define AD_BASE_URL [BASE_URL stringByAppendingString:@"mobile/adstart?nid=%d"]
+#define ITCACHE_PATH NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]
+#define AD_CACHE_PATH [ITCACHE_PATH stringByAppendingPathComponent:@"AD_CACHE"]
 - (void)show:(NSString *)key
 {
-    
     NSDictionary *adDic;
     FMDatabase *db = [FMDatabase databaseWithPath:[DB_PATH stringByAppendingPathComponent:@"poketeastwind.db"]];
     NSString *sqlStr = @"SELECT * FROM ad_cache WHERE node_title = ?";
@@ -71,48 +69,27 @@
     [db close];
     
     if (adDic) {
-        __weak NewsADAlertWindow *safe_self = self;
-        [self.newsADImageView setImageWithURL:[NSURL URLWithString:[adDic objectForKey:@"field_thumbnails"]] placeholderImage:[UIImage imageNamed:@"image_default.png"]];
+        if ([adDic objectForKey:@"field_thumbnails"] && ![[adDic objectForKey:@"field_thumbnails"] isEqualToString:@""]) {
+            NSString *imageName = [ADDownLoadManager md5HexDigest:[adDic objectForKey:@"field_thumbnails"]];
+            NSString *imagePath = [AD_CACHE_PATH stringByAppendingPathComponent:imageName];
+            self.newsADImageView.image = [UIImage imageWithContentsOfFile:imagePath];
+            
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            appDelegate.alertViewCache = self;
+            self.hidden = NO;
+            [self makeKeyAndVisible];
+            //2秒钟后消失
+            [self performSelector:@selector(hide) withObject:self afterDelay:3.0f];
+            
+        }
+        else
+        {
+            [self hide];
+        }
         
-        NSString *urlString = [NSString stringWithFormat:AD_BASE_URL,[[adDic objectForKey:@"nid"] intValue]];
-        NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:urlString]];
-        self.request = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-        [self.request setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation,id successObject){
-            id rs = [[NSJSONSerialization JSONObjectWithData:successObject options:NSJSONReadingAllowFragments error:nil] objectAtIndex:0];
-            NSString *serverVersion = [rs objectForKey:@"node_changed"];
-            if ([serverVersion doubleValue] != [[adDic objectForKey:@"node_changed"] doubleValue]) {
-                
-                [safe_self.newsADImageView setImageWithURL:[NSURL URLWithString:[rs objectForKey:@"field_thumbnails"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                    
-                    FMDatabase *db = [FMDatabase databaseWithPath:[DB_PATH stringByAppendingPathComponent:@"poketeastwind.db"]];
-                    NSString *sqlStr = @"UPDATE ad_cache SET node_changed = ? ,field_thumbnails = ? WHERE node_title = ?";
-                    if ([db open])
-                    {
-                        
-                        [db executeUpdate:sqlStr,[NSNumber numberWithDouble:[[rs objectForKey:@"node_changed"] doubleValue]],[rs objectForKey:@"field_thumbnails"],key];
-                    }
-                    [db close];
-                    
-                }];
-                
-            }
-            
-            
-        }failure:^(AFHTTPRequestOperation *operation,NSError *error){
-            
-        }];
-        [self.request start];
-    }
+        [[ADDownLoadManager sharedManager] downLoadAD:adDic adKey:key];
 
-    
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.alertViewCache = self;
-    
-    self.hidden = NO;
-    [self makeKeyAndVisible];
-    
-    //2秒钟后消失
-    [self performSelector:@selector(hide) withObject:self afterDelay:3.0f];
+    }
 }
 
 - (void)hide
@@ -126,13 +103,4 @@
 {
     self.newsADImageView = nil;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 @end

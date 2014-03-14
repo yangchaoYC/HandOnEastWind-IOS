@@ -96,6 +96,7 @@
 		6E18A4F718CDADD2005431A4 /* navigation_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E18A4F518CDADD2005431A4 /* navigation_icon@2x.png */; };
 		6E18A50118CEC774005431A4 /* ADWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E18A50018CEC774005431A4 /* ADWindow.m */; };
 		6E18A50418CECF46005431A4 /* PartnersAlertWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E18A50318CECF45005431A4 /* PartnersAlertWindow.m */; };
+		6E5FC55318D2A97E00A860AD /* ADDownLoadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FC55218D2A97E00A860AD /* ADDownLoadManager.m */; };
 		6E98E2F818D05348009391E4 /* btn_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E98E2F618D05348009391E4 /* btn_more@2x.png */; };
 		6E98E2F918D05348009391E4 /* btn_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E98E2F718D05348009391E4 /* btn_more.png */; };
 		6E98E2FC18D0534D009391E4 /* btn_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E98E2FA18D0534D009391E4 /* btn_close.png */; };
@@ -303,6 +304,8 @@
 		6E18A50018CEC774005431A4 /* ADWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADWindow.m; sourceTree = "<group>"; };
 		6E18A50218CECF45005431A4 /* PartnersAlertWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartnersAlertWindow.h; sourceTree = "<group>"; };
 		6E18A50318CECF45005431A4 /* PartnersAlertWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartnersAlertWindow.m; sourceTree = "<group>"; };
+		6E5FC55118D2A97E00A860AD /* ADDownLoadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADDownLoadManager.h; sourceTree = "<group>"; };
+		6E5FC55218D2A97E00A860AD /* ADDownLoadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADDownLoadManager.m; sourceTree = "<group>"; };
 		6E98E2F618D05348009391E4 /* btn_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_more@2x.png"; sourceTree = "<group>"; };
 		6E98E2F718D05348009391E4 /* btn_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_more.png; sourceTree = "<group>"; };
 		6E98E2FA18D0534D009391E4 /* btn_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_close.png; sourceTree = "<group>"; };
@@ -704,6 +707,8 @@
 				6E0B67F318CED32B00D8B74B /* PartnersCell.xib */,
 				6E052D5218D02633003624F6 /* NewsADAlertWindow.h */,
 				6E052D5318D02633003624F6 /* NewsADAlertWindow.m */,
+				6E5FC55118D2A97E00A860AD /* ADDownLoadManager.h */,
+				6E5FC55218D2A97E00A860AD /* ADDownLoadManager.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -1124,6 +1129,7 @@
 				3B9F1AEB18B8D7CD007FD82E /* SettingViewController.m in Sources */,
 				3B574E9018C1C10400C6F6FC /* NewsFocusCell.m in Sources */,
 				6E18A50418CECF46005431A4 /* PartnersAlertWindow.m in Sources */,
+				6E5FC55318D2A97E00A860AD /* ADDownLoadManager.m in Sources */,
 				6E0B680218CF03B100D8B74B /* MJRefreshConst.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
