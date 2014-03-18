@@ -9,8 +9,8 @@
 #import "NewsDetailsViewController.h"
 #import "NewsModel.h"
 #import "RegexKitLite.h"
+#import "UMSocial.h"
 #import <ShareSDK/ShareSDK.h>
-
 @interface NewsDetailsViewController ()
 
 @end
@@ -100,6 +100,16 @@
 
 - (IBAction)shareBtnClick:(id)sender
 {
+    /*
+    
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"507fcab25270157b37000010"
+                                      shareText:@"你要分享的文字"
+                                     shareImage:[UIImage imageNamed:@"icon.png"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToSms,UMShareToEmail,UMShareToWechatSession,UMShareToWechatTimeline,nil]
+                                       delegate:nil];
+    */
+    
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK"  ofType:@"jpg"];
     
     //构造分享内容
@@ -127,6 +137,7 @@
                                     NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
                                 }
                             }];
+    
 }
 
 @end

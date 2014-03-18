@@ -8,8 +8,17 @@
 
 #import "AppDelegate.h"
 #import "FMDatabase.h"
-#import <ShareSDK/ShareSDK.h>
 #import "ADWindow.h"
+#import "UMSocial.h"
+
+#import <ShareSDK/ShareSDK.h>
+#import "WeiboSDK.h"
+#import "WXApi.h"
+#import "WeiboApi.h"
+#import "WXApiObject.h"
+#import "YXApi.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
 
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
 
@@ -32,6 +41,11 @@
         [self.adWindow show];
     }];
     
+    
+    [UMSocialData setAppKey:@"507fcab25270157b37000010"];
+    
+    
+    
     [ShareSDK registerApp:@"15415d0dd348"];
     
     //添加新浪微博应用
@@ -44,73 +58,41 @@
                                   appSecret:@"ae36f4ee3946e1cbb98d6965b0b2ff5c"
                                 redirectUri:@"http://www.sharesdk.cn"];
     
-    //添加QQ空间应用
-    [ShareSDK connectQZoneWithAppKey:@"100371282"
-                           appSecret:@"aed9b0303e3ed1e27bae87c33761161d"];
     
-    //添加网易微博应用
-    [ShareSDK connect163WeiboWithAppKey:@"T5EI7BXe13vfyDuy"
-                              appSecret:@"gZxwyNOvjFYpxwwlnuizHRRtBRZ2lV1j"
-                            redirectUri:@"http://www.shareSDK.cn"];
+    //添加微信应用
+    [ShareSDK connectWeChatWithAppId:@"wx6dd7a9b94f3dd72a"        //此参数为申请的微信AppID
+                           wechatCls:[WXApi class]];
     
-    //添加搜狐微博应用
-    [ShareSDK connectSohuWeiboWithConsumerKey:@"SAfmTG1blxZY3HztESWx"
-                               consumerSecret:@"yfTZf)!rVwh*3dqQuVJVsUL37!F)!yS9S!Orcsij"
-                                  redirectUri:@"http://www.sharesdk.cn"];
+    //连接短信分享
+    [ShareSDK connectSMS];
     
-    //添加豆瓣应用
-    [ShareSDK connectDoubanWithAppKey:@"07d08fbfc1210e931771af3f43632bb9"
-                            appSecret:@"e32896161e72be91"
-                          redirectUri:@"http://dev.kumoway.com/braininference/infos.php"];
+    //连接邮件
+    [ShareSDK connectMail];
     
-    //添加人人网应用
-    [ShareSDK connectRenRenWithAppKey:@"fc5b8aed373c4c27a05b712acba0f8c3"
-                            appSecret:@"f29df781abdd4f49beca5a2194676ca4"];
-    
-    //添加开心网应用
-    [ShareSDK connectKaiXinWithAppKey:@"358443394194887cee81ff5890870c7c"
-                            appSecret:@"da32179d859c016169f66d90b6db2a23"
-                          redirectUri:@"http://www.sharesdk.cn/"];
-    
-    //添加Instapaper应用
-    [ShareSDK connectInstapaperWithAppKey:@"4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA"
-                                appSecret:@"GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe"];
-    
-    //添加有道云笔记应用
-    [ShareSDK connectYouDaoNoteWithConsumerKey:@"dcde25dca105bcc36884ed4534dab940"
-                                consumerSecret:@"d98217b4020e7f1874263795f44838fe"
-                                   redirectUri:@"http://www.sharesdk.cn/"];
-    
-    //添加Facebook应用
-    [ShareSDK connectFacebookWithAppKey:@"107704292745179"
-                              appSecret:@"38053202e1a5fe26c80c753071f0b573"];
-    
-    //添加Twitter应用
-    [ShareSDK connectTwitterWithConsumerKey:@"mnTGqtXk0TYMXYTN7qUxg"
-                             consumerSecret:@"ROkFqr8c3m1HXqS3rm3TJ0WkAJuwBOSaWhPbZ9Ojuc"
-                                redirectUri:@"http://www.sharesdk.cn"];
-    
-    //添加搜狐随身看应用
-    [ShareSDK connectSohuKanWithAppKey:@"e16680a815134504b746c86e08a19db0"
-                             appSecret:@"b8eec53707c3976efc91614dd16ef81c"
-                           redirectUri:@"http://sharesdk.cn"];
-    
-    //添加Pocket应用
-    [ShareSDK connectPocketWithConsumerKey:@"11496-de7c8c5eb25b2c9fcdc2b627"
-                               redirectUri:@"pocketapp1234"];
-    
-    //添加印象笔记应用
-    [ShareSDK connectEvernoteWithType:SSEverNoteTypeSandbox
-                          consumerKey:@"sharesdk-7807"
-                       consumerSecret:@"d05bf86993836004"];
-    
-    //添加LinkedIn应用
-    [ShareSDK connectLinkedInWithApiKey:@"ejo5ibkye3vo"
-                              secretKey:@"cC7B2jpxITqPLZ5M"
-                            redirectUri:@"http://sharesdk.cn"];
     
     return YES;
 }
+
+
+
+- (BOOL)application:(UIApplication *)application  handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url
+                        wxDelegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return [ShareSDK handleOpenURL:url
+                 sourceApplication:sourceApplication
+                        annotation:annotation
+                        wxDelegate:self];
+}
+
+
 
 - (void)initDatabase
 {
