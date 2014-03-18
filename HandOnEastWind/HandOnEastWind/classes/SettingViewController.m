@@ -40,6 +40,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.settingTableView.bounces = NO;
+    self.settingTableView.showsVerticalScrollIndicator = NO;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -49,7 +51,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return 46;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -63,7 +65,9 @@
 
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
     [cell.contentView addSubview:titleLabel];
-    
+    UIView *separator = [[UIView alloc]initWithFrame:CGRectMake(0, 46, 300, 1)];
+    separator.backgroundColor = [UIColor blackColor];
+    [cell.contentView addSubview:separator];
     switch (indexPath.row) {
         case 0:
         {

@@ -71,7 +71,7 @@
     NSString *time = [formatter stringFromDate:_lastUpdateTime];
     
     // 3.显示日期
-    _lastUpdateTimeLabel.text = [NSString stringWithFormat:@"最后更新：%@", time];
+   // _lastUpdateTimeLabel.text = [NSString stringWithFormat:@"最后更新：%@", time];
 }
 
 #pragma mark 设置状态
