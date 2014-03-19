@@ -42,6 +42,7 @@
 	// Do any additional setup after loading the view.
     self.settingTableView.bounces = NO;
     self.settingTableView.showsVerticalScrollIndicator = NO;
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -51,7 +52,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 46;
+    return 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,11 +63,15 @@
     if(!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    
+    UIFont *Font_ForgetPwd = [UIFont fontWithName:@"ARIAL" size:13.0f];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 100, 14)];
+    titleLabel.font = Font_ForgetPwd;
+    
     [cell.contentView addSubview:titleLabel];
-    UIView *separator = [[UIView alloc]initWithFrame:CGRectMake(0, 46, 300, 1)];
-    separator.backgroundColor = [UIColor blackColor];
+    UIView *separator = [[UIView alloc]initWithFrame:CGRectMake(0, 43, 300, 1)];
+    separator.backgroundColor = [UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f  blue:200.0f/255.0f  alpha:1];
     [cell.contentView addSubview:separator];
     switch (indexPath.row) {
         case 0:
@@ -74,7 +79,7 @@
             titleLabel.text = @"字体大小";
             UISegmentedControl *fontSizeControl = [[UISegmentedControl alloc] initWithItems:@[@"小",@"中",@"大"]];
             [fontSizeControl addTarget:self action:@selector(changeFontsize:) forControlEvents:UIControlEventValueChanged];  //添加委托方法
-            fontSizeControl.frame = CGRectMake(200, 0, 100, 30);
+            fontSizeControl.frame = CGRectMake(190, 8, 100, 30);
             fontSizeControl.selectedSegmentIndex = [self getFontsize];
             [cell.contentView addSubview:fontSizeControl];
         }
@@ -82,7 +87,7 @@
         case 1:
         {
             titleLabel.text = @"无图模式";
-            UISwitch *sw = [[UISwitch alloc] initWithFrame:CGRectMake(200, 0, 50, 30)];
+            UISwitch *sw = [[UISwitch alloc] initWithFrame:CGRectMake(210, 8, 50, 30)];
             [sw addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
             sw.tag = 1;
             [sw setOn:![self getHasImage]];
@@ -92,7 +97,7 @@
         case 2:
         {
             titleLabel.text = @"推送设置";
-            UISwitch *sw = [[UISwitch alloc] initWithFrame:CGRectMake(200, 0, 50, 30)];
+            UISwitch *sw = [[UISwitch alloc] initWithFrame:CGRectMake(210, 8, 50, 30)];
             [sw addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
             sw.tag = 2;
             [sw setOn:[self getHasPush]];
@@ -102,7 +107,7 @@
         case 3:
         {
             titleLabel.text = @"推送铃声";
-            UISwitch *sw = [[UISwitch alloc] initWithFrame:CGRectMake(200, 0, 50, 30)];
+            UISwitch *sw = [[UISwitch alloc] initWithFrame:CGRectMake(210, 8, 50, 30)];
             [sw addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
             sw.tag = 3;
             [sw setOn:[self getHasPushRing]];
@@ -119,8 +124,9 @@
             
             
             
-            UILabel *cacheLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 0, 100, 30)];
-            cacheLabel.font = [UIFont systemFontOfSize:12.0f];
+            UILabel *cacheLabel = [[UILabel alloc] initWithFrame:CGRectMake(180, 8, 120, 30)];
+            cacheLabel.font = [UIFont systemFontOfSize:14.0f];
+            cacheLabel.textColor = [UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f  blue:200.0f/255.0f  alpha:1];
             cacheLabel.text = [NSString stringWithFormat:@"缓存大小 %.2f M",sumSize / 1024.0f / 1024.0f];
             [cell.contentView addSubview:cacheLabel];
         }
