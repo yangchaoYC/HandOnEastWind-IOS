@@ -81,6 +81,7 @@
             [fontSizeControl addTarget:self action:@selector(changeFontsize:) forControlEvents:UIControlEventValueChanged];  //添加委托方法
             fontSizeControl.frame = CGRectMake(190, 8, 100, 30);
             fontSizeControl.selectedSegmentIndex = [self getFontsize];
+            fontSizeControl.tintColor = [UIColor colorWithRed:74.0f/255.0f green:213.0f/255.0f blue:98.0f/255.0f alpha:1];
             [cell.contentView addSubview:fontSizeControl];
         }
             break;

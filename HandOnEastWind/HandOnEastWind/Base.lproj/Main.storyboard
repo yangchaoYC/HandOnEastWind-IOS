@@ -95,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lz2-6f-BTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5" y="-1107"/>
+            <point key="canvasLocation" x="65" y="-791"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="eTe-SG-Sep">
@@ -151,7 +151,7 @@
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q1w-W8-JLf">
                                         <rect key="frame" x="20" y="11" width="42" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -188,7 +188,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hWW-0x-rfo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5" y="1276"/>
+            <point key="canvasLocation" x="5" y="352"/>
         </scene>
         <!--Shared View Controller - 分享-->
         <scene sceneID="pzu-Do-84O">
@@ -197,6 +197,38 @@
                     <view key="view" contentMode="scaleToFill" id="e0w-Lt-diC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="aNf-Jd-i5U">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qya-Fl-FLi">
+                                        <rect key="frame" x="20" y="11" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.66666666669999997" green="0.50980392159999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="3FD-37-KEX">
+                                <rect key="frame" x="20" y="100" width="320" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="erwei.png" id="dJr-KM-6cL">
+                                <rect key="frame" x="88" y="171" width="144" height="144"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫描二维码下载手机客户端" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ojL-Ks-AQc">
+                                <rect key="frame" x="0.0" y="323" width="320" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="insetFor6xAndEarlier" minX="0.0" minY="-20" maxX="0.0" maxY="20"/>
                     </view>
@@ -204,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yEZ-ed-bQQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="413" y="542"/>
+            <point key="canvasLocation" x="465" y="70"/>
         </scene>
         <!--News Details View Controller-->
         <scene sceneID="tCy-n1-GTa">
@@ -254,7 +286,7 @@
                                             <segment title="中" width="30"/>
                                             <segment title="大" width="30"/>
                                         </segments>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.29019609093666077" green="0.83529418706893921" blue="0.38431376218795776" alpha="1" colorSpace="deviceRGB"/>
                                         <connections>
                                             <action selector="changeFontsize:" destination="gUm-yC-rOH" eventType="valueChanged" id="gH1-0l-Qga"/>
                                         </connections>
@@ -282,7 +314,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsa-DX-Co9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1170" y="-214"/>
+            <point key="canvasLocation" x="842" y="-498"/>
         </scene>
         <!--News View Controller - 新闻-->
         <scene sceneID="w0c-QN-yoy">
@@ -347,12 +379,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5eh-LB-e22" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="413" y="-214"/>
+            <point key="canvasLocation" x="29" y="-234"/>
         </scene>
     </scenes>
     <resources>
         <image name="btn_more.png" width="30" height="30"/>
         <image name="btn_partners.png" width="102" height="25"/>
+        <image name="erwei.png" width="495" height="495"/>
+        <image name="logo.png" width="320" height="40"/>
         <image name="news_detail_back.png" width="63" height="44"/>
         <image name="news_detail_share.png" width="61" height="44"/>
     </resources>

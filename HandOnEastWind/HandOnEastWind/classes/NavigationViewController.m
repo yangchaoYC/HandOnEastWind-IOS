@@ -78,8 +78,32 @@
     NavigationCell *navCell = (NavigationCell *)cell;
     
     navCell.titleLabel.text = [self.navigationsArray objectAtIndex:indexPath.row];
-    navCell.detailLabel.text = @"展示集团风采，弘扬精神文明";
-    navCell.iconImageView.image = [UIImage imageNamed:@"navigation_icon.png"];
+    
+    switch (indexPath.row) {
+        case 0:
+            navCell.detailLabel.text = @"展示集团风采，弘扬精神文明";
+            navCell.iconImageView.image = [UIImage imageNamed:@"navigation_icon.png"];
+            break;
+        case 1:
+            navCell.detailLabel.text = @"一个企业的文化与创造";
+            navCell.iconImageView.image = [UIImage imageNamed:@"nav_2.png"];
+            break;
+        case 2:
+            navCell.detailLabel.text = @"品鉴魅力汽车 畅享快乐之旅";
+            navCell.iconImageView.image = [UIImage imageNamed:@"nav_3.png"];
+            break;
+        case 3:
+            navCell.detailLabel.text = @"中国汽车产业和汽车科技自主创新的重要发言者";
+            navCell.iconImageView.image = [UIImage imageNamed:@"nav_4.png"];
+            break;
+        case 4:
+            navCell.detailLabel.text = @"中国汽车装备第一刊";
+            navCell.iconImageView.image = [UIImage imageNamed:@"nav_5.png"];
+            break;
+        default:
+            break;
+    }
+   
     return cell;
 }
 
