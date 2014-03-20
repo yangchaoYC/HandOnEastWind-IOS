@@ -109,6 +109,9 @@
 
 - (void)hide:(id)sender
 {
+    [self.refreshFooterView free];
+    [self.refreshHeaderView free];
+    
     self.request = nil;
     self.hidden = YES;
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -160,6 +163,7 @@
 - (void)dealloc
 {
     self.request = nil;
+    //[self.partnersTableView removeObserver:pull forKeyPath:@""];
     /*
     self.partnersTableView = nil;
     self.partnersDataArray = nil;

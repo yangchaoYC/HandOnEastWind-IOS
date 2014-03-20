@@ -20,6 +20,8 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 
+#import "APService.h"
+
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
 
 @implementation AppDelegate
@@ -69,6 +71,11 @@
     //连接邮件
     [ShareSDK connectMail];
     
+    //推送配置
+    // Required
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    // Required
+    [APService setupWithOption:launchOptions];
     
     return YES;
 }
@@ -92,7 +99,17 @@
                         wxDelegate:self];
 }
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    // Required
+    [APService registerDeviceToken:deviceToken];
+}
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    // Required
+    [APService handleRemoteNotification:userInfo];
+}
 
 - (void)initDatabase
 {
