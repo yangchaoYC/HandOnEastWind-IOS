@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #import "FMDatabase.h"
+#import "AKSegmentedControl.h"
 
 #define ITCACHE_PATH NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
@@ -47,7 +48,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 8;
+    return 6;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -76,13 +77,13 @@
     switch (indexPath.row) {
         case 0:
         {
-            titleLabel.text = @"字体大小";
-            UISegmentedControl *fontSizeControl = [[UISegmentedControl alloc] initWithItems:@[@"小",@"中",@"大"]];
-            [fontSizeControl addTarget:self action:@selector(changeFontsize:) forControlEvents:UIControlEventValueChanged];  //添加委托方法
-            fontSizeControl.frame = CGRectMake(190, 8, 100, 30);
-            fontSizeControl.selectedSegmentIndex = [self getFontsize];
-            fontSizeControl.tintColor = [UIColor colorWithRed:74.0f/255.0f green:213.0f/255.0f blue:98.0f/255.0f alpha:1];
-            [cell.contentView addSubview:fontSizeControl];
+            titleLabel.text = @"字体大小";            
+            
+            AKSegmentedControl *changeFontsizeControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(190, 8 , 100, 28)];
+            [changeFontsizeControl addTarget:self action:@selector(changeFontsize:) forControlEvents:UIControlEventValueChanged];
+            [changeFontsizeControl setSegmentedControlMode:AKSegmentedControlModeSticky];
+            [self setupSegmentedControl:changeFontsizeControl];
+            [cell.contentView addSubview:changeFontsizeControl];
         }
             break;
         case 1:
@@ -93,16 +94,18 @@
             sw.tag = 1;
             [sw setOn:![self getHasImage]];
             [cell.contentView addSubview:sw];
+            
         }
             break;
+            /*
         case 2:
         {
             titleLabel.text = @"推送设置";
             UISwitch *sw = [[UISwitch alloc] initWithFrame:CGRectMake(210, 8, 50, 30)];
             [sw addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
             sw.tag = 2;
-            [sw setOn:[self getHasPush]];
             [cell.contentView addSubview:sw];
+            [sw setOn:[[UIApplication sharedApplication] enabledRemoteNotificationTypes]];
         }
             break;
         case 3:
@@ -115,15 +118,14 @@
             [cell.contentView addSubview:sw];
         }
             break;
-        case 4:
+             */
+        case 2:
         {
             titleLabel.text = @"清除缓存";
             
             long long imageCacheSize = [self folderSizeAtPath:[[ITCACHE_PATH stringByAppendingPathComponent:@"com.hackemist.SDWebImageCache.default"] cStringUsingEncoding:NSUTF8StringEncoding]] + [self folderSizeAtPath:[AD_CACHE_PATH cStringUsingEncoding:NSUTF8StringEncoding]];
             
             long long sumSize = imageCacheSize;
-            
-            
             
             UILabel *cacheLabel = [[UILabel alloc] initWithFrame:CGRectMake(180, 8, 120, 30)];
             cacheLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -132,17 +134,17 @@
             [cell.contentView addSubview:cacheLabel];
         }
             break;
-        case 5:
+        case 3:
         {
             titleLabel.text = @"关于";
         }
             break;
-        case 6:
+        case 4:
         {
             titleLabel.text = @"免责声明";
         }
             break;
-        case 7:
+        case 5:
         {
             titleLabel.text = @"检查更新";
         }
@@ -155,6 +157,57 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+}
+
+- (void)setupSegmentedControl:(AKSegmentedControl *)segmentedControl
+{
+    segmentedControl.clipsToBounds = YES;
+    segmentedControl.layer.borderColor = [UIColor greenColor].CGColor;
+    segmentedControl.layer.borderWidth = 1;
+    segmentedControl.layer.cornerRadius = 3.0f;
+    [segmentedControl setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
+    
+    [segmentedControl setSeparatorImage:[self createImageWithColor:[UIColor greenColor]]];
+    
+    [segmentedControl setButtonsArray:@[[self createButtonWithTitle:@"小"],
+                                                  [self createButtonWithTitle:@"中"],
+                                                  [self createButtonWithTitle:@"大"]]];
+    
+    int fontSize = [[[NSUserDefaults standardUserDefaults] valueForKey:@"FONTSIZE"] intValue];
+    [segmentedControl setSelectedIndex:fontSize];
+}
+
+- (UIButton *)createButtonWithTitle:(NSString *)titleString
+{
+    UIImage *buttonBackgroundImagePressed = [self createImageWithColor:[UIColor greenColor]];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [btn setBackgroundImage:buttonBackgroundImagePressed forState:UIControlStateHighlighted];
+    [btn setBackgroundImage:buttonBackgroundImagePressed forState:UIControlStateSelected];
+    [btn setBackgroundImage:buttonBackgroundImagePressed forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    [btn setTitle:titleString forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    
+    [btn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [btn setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    
+    return btn;
+}
+
+- (UIImage *)createImageWithColor:(UIColor *)color
+{
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
 }
 
 - (CGFloat)fileSizeAtPath:(NSString*) filePath{
@@ -201,7 +254,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.row) {
-        case 4:
+        case 2:
         {
             NSFileManager *fileManager = [NSFileManager defaultManager];
             NSError *error = nil;
@@ -235,13 +288,13 @@
             [alert show];
         }
             break;
-        case 5:
+        case 3:
             //关于
             break;
-        case 6:
+        case 4:
             //免责声明
             break;
-        case 7:
+        case 5:
             //检查更新
             break;
         default:
@@ -249,9 +302,9 @@
     }
 }
 
-- (void)changeFontsize:(UISegmentedControl *)control
+- (void)changeFontsize:(AKSegmentedControl *)control
 {
-    NSInteger Index = control.selectedSegmentIndex;
+    NSInteger Index = control.selectedIndexes.firstIndex;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:Index] forKey:@"FONTSIZE"];
 }
 
@@ -262,7 +315,13 @@
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:!switch_.on] forKey:@"HASIMAGE"];
             break;
         case 2:
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:switch_.on] forKey:@"HASPUSH"];
+            if (!switch_.on) {
+                [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+            }
+            else
+            {
+                [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+            }
             break;
         case 3:
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:switch_.on] forKey:@"HASPUSHRING"];
@@ -280,12 +339,6 @@
 - (BOOL)getHasImage
 {
     return [[[NSUserDefaults standardUserDefaults] valueForKey:@"HASIMAGE"] boolValue];
-}
-
-- (BOOL)getHasPush
-{
-    return [[[NSUserDefaults standardUserDefaults] valueForKey:@"HASPUSH"] boolValue];
-
 }
 
 - (BOOL)getHasPushRing

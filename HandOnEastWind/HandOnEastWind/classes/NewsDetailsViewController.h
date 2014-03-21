@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 @class NewsModel;
+@class AKSegmentedControl;
 
 @interface NewsDetailsViewController : UIViewController
-    
-@property (weak, nonatomic) IBOutlet UISegmentedControl *changeFontsizeControl;
+@property (weak, nonatomic) IBOutlet UIView *bottomBar;
 @property (weak, nonatomic) IBOutlet UIWebView *newsDetailWebView;
 @property (strong,nonatomic)NewsModel *newsItem;
 - (IBAction)changeFontsize:(id)sender;

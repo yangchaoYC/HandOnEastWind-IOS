@@ -11,8 +11,10 @@
 #import "RegexKitLite.h"
 #import "UMSocial.h"
 #import <ShareSDK/ShareSDK.h>
-@interface NewsDetailsViewController ()
+#import "AKSegmentedControl.h"
 
+@interface NewsDetailsViewController ()
+@property (strong, nonatomic) AKSegmentedControl *changeFontsizeControl;
 @end
 
 @implementation NewsDetailsViewController
@@ -30,9 +32,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
-    int fontSize = [[[NSUserDefaults standardUserDefaults] valueForKey:@"FONTSIZE"] intValue];
-    self.changeFontsizeControl.selectedSegmentIndex = fontSize;
+    
+    self.changeFontsizeControl = [[AKSegmentedControl alloc] initWithFrame:CGRectMake(216, 10 , 92, 28)];
+    [self.changeFontsizeControl addTarget:self action:@selector(changeFontsize:) forControlEvents:UIControlEventValueChanged];
+    [self.changeFontsizeControl setSegmentedControlMode:AKSegmentedControlModeSticky];
+    [self setupSegmentedControl:self.changeFontsizeControl];
+    [self.bottomBar addSubview:self.changeFontsizeControl];
     
     //加载本地模版
     NSURL *baseURL = [NSURL URLWithString:BASE_URL];
@@ -75,15 +80,66 @@
     [self.newsDetailWebView loadHTMLString:html baseURL:baseURL];
 }
 
+- (void)setupSegmentedControl:(AKSegmentedControl *)segmentedControl
+{
+    segmentedControl.clipsToBounds = YES;
+    segmentedControl.layer.borderColor = [UIColor greenColor].CGColor;
+    segmentedControl.layer.borderWidth = 1;
+    segmentedControl.layer.cornerRadius = 3.0f;
+    [segmentedControl setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
+    
+    [segmentedControl setSeparatorImage:[self createImageWithColor:[UIColor greenColor]]];
+    
+    [segmentedControl setButtonsArray:@[[self createButtonWithTitle:@"小"],
+                                        [self createButtonWithTitle:@"中"],
+                                        [self createButtonWithTitle:@"大"]]];
+    
+    int fontSize = [[[NSUserDefaults standardUserDefaults] valueForKey:@"FONTSIZE"] intValue];
+    [segmentedControl setSelectedIndex:fontSize];
+}
+
+- (UIButton *)createButtonWithTitle:(NSString *)titleString
+{
+    UIImage *buttonBackgroundImagePressed = [self createImageWithColor:[UIColor greenColor]];
+
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [btn setBackgroundImage:buttonBackgroundImagePressed forState:UIControlStateHighlighted];
+    [btn setBackgroundImage:buttonBackgroundImagePressed forState:UIControlStateSelected];
+    [btn setBackgroundImage:buttonBackgroundImagePressed forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    [btn setTitle:titleString forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
+    
+    [btn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [btn setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    
+    return btn;
+}
+
+- (UIImage *)createImageWithColor:(UIColor *)color
+{
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return theImage;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)changeFontsize:(UISegmentedControl *)sender
+- (IBAction)changeFontsize:(AKSegmentedControl *)sender
 {
-    NSInteger Index = sender.selectedSegmentIndex;
+    NSInteger Index = sender.selectedIndexes.firstIndex;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:Index] forKey:@"FONTSIZE"];
     NSString *changeFontSizeString = [NSString stringWithFormat:@"changeFontSize(%d);",Index];
     [self.newsDetailWebView stringByEvaluatingJavaScriptFromString:changeFontSizeString];

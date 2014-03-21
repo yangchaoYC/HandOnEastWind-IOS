@@ -98,6 +98,17 @@
 		6E25152B18DAA65D0025AC59 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E25152A18DAA65D0025AC59 /* CFNetwork.framework */; };
 		6E25152D18DAA66B0025AC59 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E25152C18DAA66B0025AC59 /* CoreFoundation.framework */; };
 		6E25152F18DAA8130025AC59 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E25152E18DAA8130025AC59 /* PushConfig.plist */; };
+		6E33071618DBDD8F008D9D8C /* AKSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E33071518DBDD8F008D9D8C /* AKSegmentedControl.m */; };
+		6E33072118DBE1F4008D9D8C /* segmented-bg-pressed-center.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E33071718DBE1F4008D9D8C /* segmented-bg-pressed-center.png */; };
+		6E33072218DBE1F4008D9D8C /* segmented-bg-pressed-center@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E33071818DBE1F4008D9D8C /* segmented-bg-pressed-center@2x.png */; };
+		6E33072318DBE1F4008D9D8C /* segmented-bg-pressed-left.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E33071918DBE1F4008D9D8C /* segmented-bg-pressed-left.png */; };
+		6E33072418DBE1F4008D9D8C /* segmented-bg-pressed-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E33071A18DBE1F4008D9D8C /* segmented-bg-pressed-left@2x.png */; };
+		6E33072518DBE1F4008D9D8C /* segmented-bg-pressed-right.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E33071B18DBE1F4008D9D8C /* segmented-bg-pressed-right.png */; };
+		6E33072618DBE1F4008D9D8C /* segmented-bg-pressed-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E33071C18DBE1F4008D9D8C /* segmented-bg-pressed-right@2x.png */; };
+		6E33072718DBE1F4008D9D8C /* segmented-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E33071D18DBE1F4008D9D8C /* segmented-bg.png */; };
+		6E33072818DBE1F4008D9D8C /* segmented-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E33071E18DBE1F4008D9D8C /* segmented-bg@2x.png */; };
+		6E33072918DBE1F4008D9D8C /* segmented-separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E33071F18DBE1F4008D9D8C /* segmented-separator.png */; };
+		6E33072A18DBE1F4008D9D8C /* segmented-separator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E33072018DBE1F4008D9D8C /* segmented-separator@2x.png */; };
 		6E5FC55318D2A97E00A860AD /* ADDownLoadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FC55218D2A97E00A860AD /* ADDownLoadManager.m */; };
 		6E98E2F818D05348009391E4 /* btn_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E98E2F618D05348009391E4 /* btn_more@2x.png */; };
 		6E98E2F918D05348009391E4 /* btn_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E98E2F718D05348009391E4 /* btn_more.png */; };
@@ -338,6 +349,18 @@
 		6E25152A18DAA65D0025AC59 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		6E25152C18DAA66B0025AC59 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		6E25152E18DAA8130025AC59 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		6E33071418DBDD8F008D9D8C /* AKSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSegmentedControl.h; sourceTree = "<group>"; };
+		6E33071518DBDD8F008D9D8C /* AKSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSegmentedControl.m; sourceTree = "<group>"; };
+		6E33071718DBE1F4008D9D8C /* segmented-bg-pressed-center.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-bg-pressed-center.png"; sourceTree = "<group>"; };
+		6E33071818DBE1F4008D9D8C /* segmented-bg-pressed-center@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-bg-pressed-center@2x.png"; sourceTree = "<group>"; };
+		6E33071918DBE1F4008D9D8C /* segmented-bg-pressed-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-bg-pressed-left.png"; sourceTree = "<group>"; };
+		6E33071A18DBE1F4008D9D8C /* segmented-bg-pressed-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-bg-pressed-left@2x.png"; sourceTree = "<group>"; };
+		6E33071B18DBE1F4008D9D8C /* segmented-bg-pressed-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-bg-pressed-right.png"; sourceTree = "<group>"; };
+		6E33071C18DBE1F4008D9D8C /* segmented-bg-pressed-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-bg-pressed-right@2x.png"; sourceTree = "<group>"; };
+		6E33071D18DBE1F4008D9D8C /* segmented-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-bg.png"; sourceTree = "<group>"; };
+		6E33071E18DBE1F4008D9D8C /* segmented-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-bg@2x.png"; sourceTree = "<group>"; };
+		6E33071F18DBE1F4008D9D8C /* segmented-separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-separator.png"; sourceTree = "<group>"; };
+		6E33072018DBE1F4008D9D8C /* segmented-separator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "segmented-separator@2x.png"; sourceTree = "<group>"; };
 		6E5FC55118D2A97E00A860AD /* ADDownLoadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADDownLoadManager.h; sourceTree = "<group>"; };
 		6E5FC55218D2A97E00A860AD /* ADDownLoadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADDownLoadManager.m; sourceTree = "<group>"; };
 		6E98E2F618D05348009391E4 /* btn_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_more@2x.png"; sourceTree = "<group>"; };
@@ -605,6 +628,7 @@
 		3B7CD26518B9D4F300EC1975 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				6E33071318DBDD8F008D9D8C /* AKSegmentedControl */,
 				6E25152618DAA60D0025AC59 /* JPush */,
 				711C907918D843A80081B1D5 /* ShareSDK */,
 				711C907018D843260081B1D5 /* UMSocial_Sdk_Extra_Frameworks */,
@@ -843,6 +867,25 @@
 				6E25152818DAA61B0025AC59 /* libPushSDK.a */,
 			);
 			path = JPush;
+			sourceTree = "<group>";
+		};
+		6E33071318DBDD8F008D9D8C /* AKSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				6E33071718DBE1F4008D9D8C /* segmented-bg-pressed-center.png */,
+				6E33071818DBE1F4008D9D8C /* segmented-bg-pressed-center@2x.png */,
+				6E33071918DBE1F4008D9D8C /* segmented-bg-pressed-left.png */,
+				6E33071A18DBE1F4008D9D8C /* segmented-bg-pressed-left@2x.png */,
+				6E33071B18DBE1F4008D9D8C /* segmented-bg-pressed-right.png */,
+				6E33071C18DBE1F4008D9D8C /* segmented-bg-pressed-right@2x.png */,
+				6E33071D18DBE1F4008D9D8C /* segmented-bg.png */,
+				6E33071E18DBE1F4008D9D8C /* segmented-bg@2x.png */,
+				6E33071F18DBE1F4008D9D8C /* segmented-separator.png */,
+				6E33072018DBE1F4008D9D8C /* segmented-separator@2x.png */,
+				6E33071418DBDD8F008D9D8C /* AKSegmentedControl.h */,
+				6E33071518DBDD8F008D9D8C /* AKSegmentedControl.m */,
+			);
+			path = AKSegmentedControl;
 			sourceTree = "<group>";
 		};
 		711C904A18D843100081B1D5 /* UMSocial_Sdk_3.3.6 */ = {
@@ -1176,14 +1219,18 @@
 				6E18A4F018CD9261005431A4 /* news_detail_share@2x.png in Resources */,
 				711C906D18D843100081B1D5 /* UMSnsAccountViewController.xib in Resources */,
 				6E98E30118D05522009391E4 /* btn_partners@2x.png in Resources */,
+				6E33072A18DBE1F4008D9D8C /* segmented-separator@2x.png in Resources */,
+				6E33072118DBE1F4008D9D8C /* segmented-bg-pressed-center.png in Resources */,
 				6E18A4DD18CD7CAC005431A4 /* btn_icon_news@2x.png in Resources */,
 				711C906C18D843100081B1D5 /* UMSLoginViewController.xib in Resources */,
 				711C90ED18D843A80081B1D5 /* ShareSDKLocalizable.strings in Resources */,
+				6E33072518DBE1F4008D9D8C /* segmented-bg-pressed-right.png in Resources */,
 				71F230A018D93C5900563A06 /* btn_icon_site.png in Resources */,
 				711C90D618D843A80081B1D5 /* InstapaperResource.bundle in Resources */,
 				3B834D3518B8792600AA5876 /* Images.xcassets in Resources */,
 				3B28FDB118B9FAB100E1D5B1 /* blackArrow.png in Resources */,
 				711C906818D843100081B1D5 /* UMSCommentInputController.xib in Resources */,
+				6E33072718DBE1F4008D9D8C /* segmented-bg.png in Resources */,
 				3B28FDB618B9FAB100E1D5B1 /* grayArrow@2x.png in Resources */,
 				3B28FDB718B9FAB100E1D5B1 /* whiteArrow.png in Resources */,
 				6E18A4E018CD7CAC005431A4 /* btn_icon_share@2x.png in Resources */,
@@ -1203,6 +1250,7 @@
 				71F230B918D9980600563A06 /* nav_5@2x.png in Resources */,
 				6E18A4EC18CD9261005431A4 /* news_detail_back@2x.png in Resources */,
 				6E18A4DC18CD7CAC005431A4 /* btn_icon_news.png in Resources */,
+				6E33072618DBE1F4008D9D8C /* segmented-bg-pressed-right@2x.png in Resources */,
 				711C90F718D843A80081B1D5 /* RennSDK.bundle in Resources */,
 				711C910818D843A90081B1D5 /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */,
 				3B28FDB218B9FAB100E1D5B1 /* blackArrow@2x.png in Resources */,
@@ -1217,9 +1265,12 @@
 				71F230C018D9997A00563A06 /* nav_4.png in Resources */,
 				711DF87918CEF8070018E9FA /* image_default.png in Resources */,
 				3B28FDB418B9FAB100E1D5B1 /* blueArrow@2x.png in Resources */,
+				6E33072818DBE1F4008D9D8C /* segmented-bg@2x.png in Resources */,
 				711C90F118D843A80081B1D5 /* GooglePlus.bundle in Resources */,
 				6E0B67F418CED32B00D8B74B /* PartnersCell.xib in Resources */,
+				6E33072218DBE1F4008D9D8C /* segmented-bg-pressed-center@2x.png in Resources */,
 				71F230A418D9897900563A06 /* logo.png in Resources */,
+				6E33072418DBE1F4008D9D8C /* segmented-bg-pressed-left@2x.png in Resources */,
 				711C906E18D843100081B1D5 /* UMSShareListController.xib in Resources */,
 				3B574E9218C1C13F00C6F6FC /* NewsCell.xib in Resources */,
 				3B574E8818C1A2A100C6F6FC /* cache.sql in Resources */,
@@ -1232,6 +1283,8 @@
 				3B7CD26B18B9D78700EC1975 /* navigations.txt in Resources */,
 				3B28FDB318B9FAB100E1D5B1 /* blueArrow.png in Resources */,
 				6E98E2F918D05348009391E4 /* btn_more.png in Resources */,
+				6E33072918DBE1F4008D9D8C /* segmented-separator.png in Resources */,
+				6E33072318DBE1F4008D9D8C /* segmented-bg-pressed-left.png in Resources */,
 				6E18A4E418CD7CAC005431A4 /* btn_icon_site2.png in Resources */,
 				711DF87318CEF7D10018E9FA /* btn_icon_news2.png in Resources */,
 				711C906918D843100081B1D5 /* UMSCommentInputControlleriPad.xib in Resources */,
@@ -1325,6 +1378,7 @@
 				3B7CD26218B9C2C100EC1975 /* CustomTabBarView.m in Sources */,
 				3B9F1AE818B8D7B7007FD82E /* SharedViewController.m in Sources */,
 				6E0B67F218CED31400D8B74B /* PartnersCell.m in Sources */,
+				6E33071618DBDD8F008D9D8C /* AKSegmentedControl.m in Sources */,
 				6E0B680418CF03B100D8B74B /* MJRefreshHeaderView.m in Sources */,
 				3B28FDAD18B9FAB100E1D5B1 /* EGORefreshTableHeaderView.m in Sources */,
 				6E0B680318CF03B100D8B74B /* MJRefreshFooterView.m in Sources */,

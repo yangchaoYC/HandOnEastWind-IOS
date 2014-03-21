@@ -276,20 +276,6 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="2" id="RIw-uJ-bRR">
-                                        <rect key="frame" x="216" y="10" width="92" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <inset key="insetFor6xAndEarlier" minX="0.0" minY="0.0" maxX="0.0" maxY="-10"/>
-                                        <segments>
-                                            <segment title="小" width="30"/>
-                                            <segment title="中" width="30"/>
-                                            <segment title="大" width="30"/>
-                                        </segments>
-                                        <color key="tintColor" red="0.29019609093666077" green="0.83529418706893921" blue="0.38431376218795776" alpha="1" colorSpace="deviceRGB"/>
-                                        <connections>
-                                            <action selector="changeFontsize:" destination="gUm-yC-rOH" eventType="valueChanged" id="gH1-0l-Qga"/>
-                                        </connections>
-                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.50980392156862742" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -307,7 +293,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="changeFontsizeControl" destination="RIw-uJ-bRR" id="puk-eV-bwB"/>
+                        <outlet property="bottomBar" destination="HPT-MS-TrL" id="5mp-iA-GCc"/>
                         <outlet property="newsDetailWebView" destination="A1D-mY-Sdd" id="FH1-fK-8dV"/>
                     </connections>
                 </viewController>
