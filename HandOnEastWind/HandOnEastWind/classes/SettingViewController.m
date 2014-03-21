@@ -93,6 +93,9 @@
             [sw addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
             sw.tag = 1;
             [sw setOn:![self getHasImage]];
+            if (![[NSUserDefaults standardUserDefaults] valueForKey:@"HASIMAGE"]) {
+                [sw setOn:NO];
+            }
             [cell.contentView addSubview:sw];
             
         }
