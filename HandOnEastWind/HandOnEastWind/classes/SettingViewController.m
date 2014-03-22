@@ -43,6 +43,9 @@
 	// Do any additional setup after loading the view.
     self.settingTableView.bounces = NO;
     self.settingTableView.showsVerticalScrollIndicator = NO;
+    
+    self.view_Table.frame = CGRectMake(9, 70 + IS_IP5, 302, 265);
+    
 
 }
 
@@ -89,7 +92,7 @@
         case 1:
         {
             titleLabel.text = @"无图模式";
-            UISwitch *sw = [[UISwitch alloc] initWithFrame:CGRectMake(210, 8, 50, 30)];
+            UISwitch *sw = [[UISwitch alloc] initWithFrame:CGRectMake(190, 8, 50, 30)];
             [sw addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
             sw.tag = 1;
             [sw setOn:![self getHasImage]];
@@ -165,12 +168,12 @@
 - (void)setupSegmentedControl:(AKSegmentedControl *)segmentedControl
 {
     segmentedControl.clipsToBounds = YES;
-    segmentedControl.layer.borderColor = [UIColor greenColor].CGColor;
+    segmentedControl.layer.borderColor = [UIColor grayColor].CGColor;
     segmentedControl.layer.borderWidth = 1;
     segmentedControl.layer.cornerRadius = 3.0f;
     [segmentedControl setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
     
-    [segmentedControl setSeparatorImage:[self createImageWithColor:[UIColor greenColor]]];
+    [segmentedControl setSeparatorImage:[self createImageWithColor:[UIColor grayColor]]];
     
     [segmentedControl setButtonsArray:@[[self createButtonWithTitle:@"小"],
                                                   [self createButtonWithTitle:@"中"],
@@ -182,7 +185,7 @@
 
 - (UIButton *)createButtonWithTitle:(NSString *)titleString
 {
-    UIImage *buttonBackgroundImagePressed = [self createImageWithColor:[UIColor greenColor]];
+    UIImage *buttonBackgroundImagePressed = [self createImageWithColor:[UIColor grayColor]];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -192,7 +195,7 @@
     [btn setTitle:titleString forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     
-    [btn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [btn setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];

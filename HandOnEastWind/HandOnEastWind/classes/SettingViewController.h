@@ -10,4 +10,5 @@
 
 @interface SettingViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *settingTableView;
+@property (weak, nonatomic) IBOutlet UIView *view_Table;
 @end

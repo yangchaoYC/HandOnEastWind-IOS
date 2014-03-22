@@ -83,12 +83,12 @@
 - (void)setupSegmentedControl:(AKSegmentedControl *)segmentedControl
 {
     segmentedControl.clipsToBounds = YES;
-    segmentedControl.layer.borderColor = [UIColor greenColor].CGColor;
+    segmentedControl.layer.borderColor = [UIColor whiteColor].CGColor;
     segmentedControl.layer.borderWidth = 1;
     segmentedControl.layer.cornerRadius = 3.0f;
     [segmentedControl setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
     
-    [segmentedControl setSeparatorImage:[self createImageWithColor:[UIColor greenColor]]];
+    [segmentedControl setSeparatorImage:[self createImageWithColor:[UIColor whiteColor]]];
     
     [segmentedControl setButtonsArray:@[[self createButtonWithTitle:@"小"],
                                         [self createButtonWithTitle:@"中"],
@@ -100,17 +100,17 @@
 
 - (UIButton *)createButtonWithTitle:(NSString *)titleString
 {
-    UIImage *buttonBackgroundImagePressed = [self createImageWithColor:[UIColor greenColor]];
+   // UIImage *buttonBackgroundImagePressed = [self createImageWithColor:[UIColor greenColor]];
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    [btn setBackgroundImage:buttonBackgroundImagePressed forState:UIControlStateHighlighted];
-    [btn setBackgroundImage:buttonBackgroundImagePressed forState:UIControlStateSelected];
-    [btn setBackgroundImage:buttonBackgroundImagePressed forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    //[btn setBackgroundImage:buttonBackgroundImagePressed forState:UIControlStateHighlighted];
+    //[btn setBackgroundImage:buttonBackgroundImagePressed forState:UIControlStateSelected];
+    //[btn setBackgroundImage:buttonBackgroundImagePressed forState:(UIControlStateHighlighted|UIControlStateSelected)];
     [btn setTitle:titleString forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     
-    [btn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [btn setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];

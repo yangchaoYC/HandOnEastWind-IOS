@@ -59,7 +59,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 95.0f;
+    return 94.0f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -82,7 +82,7 @@
     switch (indexPath.row) {
         case 0:
             navCell.detailLabel.text = @"展示集团风采，弘扬精神文明";
-            navCell.iconImageView.image = [UIImage imageNamed:@"navigation_icon.png"];
+            navCell.iconImageView.image = [UIImage imageNamed:@"nav_1.png"];
             break;
         case 1:
             navCell.detailLabel.text = @"一个企业的文化与创造";
