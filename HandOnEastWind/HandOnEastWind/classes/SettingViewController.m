@@ -11,7 +11,7 @@
 #include <dirent.h>
 #import "FMDatabase.h"
 #import "AKSegmentedControl.h"
-
+#import "DirectionsViewController.h"
 #define ITCACHE_PATH NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
 #define AD_CACHE_PATH [ITCACHE_PATH stringByAppendingPathComponent:@"AD_CACHE"]
@@ -296,9 +296,13 @@
             break;
         case 3:
             //关于
+          
+            [self performSegueWithIdentifier:@"directions" sender:nil];
+            
             break;
         case 4:
             //免责声明
+            [self performSegueWithIdentifier:@"directions" sender:nil];
             break;
         case 5:
             //检查更新
@@ -307,6 +311,8 @@
             break;
     }
 }
+
+
 
 - (void)changeFontsize:(AKSegmentedControl *)control
 {

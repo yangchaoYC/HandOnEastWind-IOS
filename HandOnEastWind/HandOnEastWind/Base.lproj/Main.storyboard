@@ -184,6 +184,7 @@
                     <connections>
                         <outlet property="settingTableView" destination="l0y-j4-BFk" id="e2M-3z-cTs"/>
                         <outlet property="view_Table" destination="D5s-Fh-wzM" id="2o2-sg-Rpa"/>
+                        <segue destination="nEo-af-I74" kind="push" identifier="directions" id="fvx-Z2-Fss"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hWW-0x-rfo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -237,6 +238,61 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yEZ-ed-bQQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="465" y="70"/>
+        </scene>
+        <!--Directions View Controller-->
+        <scene sceneID="WVv-7Q-o8X">
+            <objects>
+                <viewController id="nEo-af-I74" customClass="DirectionsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JWK-uU-ibg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="7J7-W6-fV3">
+                                <rect key="frame" x="0.0" y="72" width="320" height="359"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="nEo-af-I74" id="3OI-IZ-oMX"/>
+                                </connections>
+                            </textView>
+                            <view contentMode="scaleToFill" id="6XJ-Vb-hFF">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7aS-a7-JPA">
+                                        <rect key="frame" x="104" y="11" width="113" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="T80-aI-nnJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="63" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" image="news_detail_back.png"/>
+                                        <connections>
+                                            <action selector="Directions_Btn:" destination="nEo-af-I74" eventType="touchUpInside" id="2g3-Mo-ZtU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.66666666669999997" green="0.50980392159999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="pPH-qQ-sqn"/>
+                    <connections>
+                        <outlet property="label_Title" destination="7aS-a7-JPA" id="60R-zc-IS6"/>
+                        <outlet property="textView_Content" destination="7J7-W6-fV3" id="50q-Ee-FCQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z2x-i4-Kut" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="479" y="664"/>
         </scene>
         <!--News Details View Controller-->
         <scene sceneID="tCy-n1-GTa">

@@ -197,6 +197,7 @@
 		711DF87618CEF7D10018E9FA /* btn_icon_share2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 711DF87218CEF7D10018E9FA /* btn_icon_share2@2x.png */; };
 		711DF87918CEF8070018E9FA /* image_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 711DF87718CEF8070018E9FA /* image_default.png */; };
 		711DF87A18CEF8070018E9FA /* image_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 711DF87818CEF8070018E9FA /* image_default@2x.png */; };
+		7154EAF918DD8C91007CBE62 /* DirectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7154EAF818DD8C91007CBE62 /* DirectionsViewController.m */; };
 		71F230A018D93C5900563A06 /* btn_icon_site.png in Resources */ = {isa = PBXBuildFile; fileRef = 71F2309E18D93C5900563A06 /* btn_icon_site.png */; };
 		71F230A118D93C5900563A06 /* btn_icon_site@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71F2309F18D93C5900563A06 /* btn_icon_site@2x.png */; };
 		71F230A418D9897900563A06 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 71F230A218D9897900563A06 /* logo.png */; };
@@ -462,6 +463,8 @@
 		711DF87218CEF7D10018E9FA /* btn_icon_share2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_icon_share2@2x.png"; sourceTree = "<group>"; };
 		711DF87718CEF8070018E9FA /* image_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_default.png; sourceTree = "<group>"; };
 		711DF87818CEF8070018E9FA /* image_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_default@2x.png"; sourceTree = "<group>"; };
+		7154EAF718DD8C91007CBE62 /* DirectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsViewController.h; sourceTree = "<group>"; };
+		7154EAF818DD8C91007CBE62 /* DirectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsViewController.m; sourceTree = "<group>"; };
 		71F2309E18D93C5900563A06 /* btn_icon_site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_icon_site.png; sourceTree = "<group>"; };
 		71F2309F18D93C5900563A06 /* btn_icon_site@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_icon_site@2x.png"; sourceTree = "<group>"; };
 		71F230A218D9897900563A06 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -795,6 +798,8 @@
 				3BB0646C18CB06CF00F09ADD /* NewsViewController.m */,
 				3B9F1AEC18B8D90F007FD82E /* NewsDetailsViewController.h */,
 				3B9F1AED18B8D90F007FD82E /* NewsDetailsViewController.m */,
+				7154EAF718DD8C91007CBE62 /* DirectionsViewController.h */,
+				7154EAF818DD8C91007CBE62 /* DirectionsViewController.m */,
 				3B574E8B18C1C0DA00C6F6FC /* NewsCell.h */,
 				3B574E8C18C1C0DA00C6F6FC /* NewsCell.m */,
 				3B574E9118C1C13F00C6F6FC /* NewsCell.xib */,
@@ -1348,6 +1353,7 @@
 				3BB0646D18CB06CF00F09ADD /* NewsViewController.m in Sources */,
 				3B9F1AEB18B8D7CD007FD82E /* SettingViewController.m in Sources */,
 				3B574E9018C1C10400C6F6FC /* NewsFocusCell.m in Sources */,
+				7154EAF918DD8C91007CBE62 /* DirectionsViewController.m in Sources */,
 				6E18A50418CECF46005431A4 /* PartnersAlertWindow.m in Sources */,
 				6E5FC55318D2A97E00A860AD /* ADDownLoadManager.m in Sources */,
 				6E0B680218CF03B100D8B74B /* MJRefreshConst.m in Sources */,
