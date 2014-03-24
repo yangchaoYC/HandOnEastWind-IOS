@@ -36,6 +36,9 @@
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
     
+    [MobClick checkUpdate];
+    
+    
     [self initDatabase];
 
     self.adWindow = [[ADWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
