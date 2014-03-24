@@ -13,7 +13,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import "AKSegmentedControl.h"
 
-@interface NewsDetailsViewController ()
+@interface NewsDetailsViewController ()<UIWebViewDelegate>
 @property (strong, nonatomic) AKSegmentedControl *changeFontsizeControl;
 @end
 
@@ -46,6 +46,7 @@
     
     //进行数据添加
     html = [html stringByReplacingOccurrencesOfString:@"{title}" withString:self.newsItem.node_title];
+    html = [html stringByReplacingOccurrencesOfString:@"{meidaSting}" withString:self.newsItem.field_newsfrom];
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:[self.newsItem.node_created doubleValue]];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -63,21 +64,15 @@
         NSString *replaceWithString = @" ";
         html = [html stringByReplacingOccurrencesOfRegex:regexString withString:replaceWithString];
     }
-    switch ([self getFontsize]) {
-        case 0:
-            html = [html stringByReplacingOccurrencesOfString:@"{fontSize}" withString:@"13pt"];
-            break;
-        case 1:
-            html = [html stringByReplacingOccurrencesOfString:@"{fontSize}" withString:@"14pt"];
-            break;
-        case 2:
-            html = [html stringByReplacingOccurrencesOfString:@"{fontSize}" withString:@"17pt"];
-            break;
-        default:
-            break;
-    }
     
+    self.newsDetailWebView.delegate = self;
     [self.newsDetailWebView loadHTMLString:html baseURL:baseURL];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    NSString *changeFontSizeString = [NSString stringWithFormat:@"changeFontSize(%d);",[self getFontsize]];
+    [self.newsDetailWebView stringByEvaluatingJavaScriptFromString:changeFontSizeString];
 }
 
 - (void)setupSegmentedControl:(AKSegmentedControl *)segmentedControl

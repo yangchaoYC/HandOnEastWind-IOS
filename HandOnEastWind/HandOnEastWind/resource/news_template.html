@@ -10,11 +10,9 @@
             {
                 case 0:
                 document.getElementById('content').style.fontSize = "13pt";
-                
                 break;
                 case 1:
                 document.getElementById('content').style.fontSize = "14pt";
-                
                 break;
                 case 2:
                 document.getElementById('content').style.fontSize = "17pt";
@@ -30,6 +28,12 @@
             
             text-align:left;
         }
+    
+    #content {
+        margin-left:10px;
+        margin-right:10px;
+        line-height:25px
+    }
     
     div.contentB img{
         max-width:100% !important;
@@ -62,11 +66,7 @@
                     </div>
                     
                 </div>
-                <div id="content" class="contentB" style="
-                    margin-left:10px;
-                    margin-right:10px;
-                    line-height:25px"
-                    >
+                <div id="content" class="contentB">
                     
                     {Content}
                     
