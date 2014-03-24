@@ -296,13 +296,13 @@
             break;
         case 3:
             //关于
-          
-            [self performSegueWithIdentifier:@"directions" sender:nil];
+            
+            [self performSegueWithIdentifier:@"directions" sender:@"关于"];
             
             break;
         case 4:
             //免责声明
-            [self performSegueWithIdentifier:@"directions" sender:nil];
+            [self performSegueWithIdentifier:@"directions" sender:@"免责声明"];
             break;
         case 5:
             //检查更新
@@ -316,8 +316,10 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //////
-    ////
+    UIViewController *send = segue.destinationViewController;
+    if ([send respondsToSelector:@selector(setKey:)]) {
+        [send setValue:sender forKey:@"key"];
+    }
 }
 
 - (void)changeFontsize:(AKSegmentedControl *)control
