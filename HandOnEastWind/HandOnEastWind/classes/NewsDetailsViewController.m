@@ -161,14 +161,18 @@
                                        delegate:nil];
     */
     
+    NSLog(@"%@",self.newsItem.nid);
+    
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK"  ofType:@"jpg"];
     
+    
+    NSString *shareString = [NSString stringWithFormat:@"我在掌上东风应用中看到一条信息,你也来看看把!---%@news/%@.html",BASE_URL,self.newsItem.nid];
     //构造分享内容
-    id<ISSContent> publishContent = [ShareSDK content:@"分享内容"
-                                       defaultContent:@"默认分享内容，没内容时显示"
+    id<ISSContent> publishContent = [ShareSDK content:shareString
+                                       defaultContent:@"东风传媒为您提供最新的信息"
                                                 image:[ShareSDK imageWithPath:imagePath]
-                                                title:@"ShareSDK"
-                                                  url:@"http://www.sharesdk.cn"
+                                                title:self.newsItem.node_title
+                                                  url:@"http://www.dfcm.cc/"
                                           description:@"这是一条测试信息"
                                             mediaType:SSPublishContentMediaTypeNews];
     
