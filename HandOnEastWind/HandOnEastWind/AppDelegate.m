@@ -10,7 +10,6 @@
 #import "FMDatabase.h"
 #import "ADWindow.h"
 #import "UMSocial.h"
-
 #import <ShareSDK/ShareSDK.h>
 #import "WeiboSDK.h"
 #import "WXApi.h"
@@ -28,6 +27,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    [ShareSDK registerApp:@"15415d0dd348"];
+    
+
+    [MobClick startWithAppkey:@"5330055056240bfa6400a30b" reportPolicy:SEND_INTERVAL   channelId:@"掌上东风"];
+    
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+    
     [self initDatabase];
 
     self.adWindow = [[ADWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -48,7 +56,7 @@
     
     
     
-    [ShareSDK registerApp:@"15415d0dd348"];
+    
     
     //添加新浪微博应用
     [ShareSDK connectSinaWeiboWithAppKey:@"3201194191"

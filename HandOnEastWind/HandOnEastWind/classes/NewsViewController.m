@@ -232,6 +232,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"PageOne"];
     id hasImage_ = [[NSUserDefaults standardUserDefaults] valueForKey:@"HASIMAGE"];
     if (!hasImage_) {
         self.hasImage = YES;
@@ -246,10 +247,13 @@
     }
 }
 
+
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     [self removeMoreView];
+    [MobClick endLogPageView:@"PageOne"];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -450,6 +454,8 @@
         [send setValue:sender forKey:@"newsItem"];
     }
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {

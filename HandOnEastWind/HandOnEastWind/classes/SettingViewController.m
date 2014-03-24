@@ -31,10 +31,19 @@
     return self;
 }
 
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"PageOne"];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.settingTableView reloadData];
+    [MobClick beginLogPageView:@"PageOne"];
 }
 
 - (void)viewDidLoad

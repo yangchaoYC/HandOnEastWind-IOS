@@ -198,6 +198,8 @@
 		711DF87918CEF8070018E9FA /* image_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 711DF87718CEF8070018E9FA /* image_default.png */; };
 		711DF87A18CEF8070018E9FA /* image_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 711DF87818CEF8070018E9FA /* image_default@2x.png */; };
 		7154EAF918DD8C91007CBE62 /* DirectionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7154EAF818DD8C91007CBE62 /* DirectionsViewController.m */; };
+		7176AC5418E03DEF00EF3E68 /* libMobClickLibrary_armv6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7176AC5118E03DEF00EF3E68 /* libMobClickLibrary_armv6.a */; };
+		7176AC5518E03DEF00EF3E68 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7176AC5218E03DEF00EF3E68 /* libMobClickLibrary.a */; };
 		71F230A018D93C5900563A06 /* btn_icon_site.png in Resources */ = {isa = PBXBuildFile; fileRef = 71F2309E18D93C5900563A06 /* btn_icon_site.png */; };
 		71F230A118D93C5900563A06 /* btn_icon_site@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 71F2309F18D93C5900563A06 /* btn_icon_site@2x.png */; };
 		71F230A418D9897900563A06 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 71F230A218D9897900563A06 /* logo.png */; };
@@ -465,6 +467,9 @@
 		711DF87818CEF8070018E9FA /* image_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_default@2x.png"; sourceTree = "<group>"; };
 		7154EAF718DD8C91007CBE62 /* DirectionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionsViewController.h; sourceTree = "<group>"; };
 		7154EAF818DD8C91007CBE62 /* DirectionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionsViewController.m; sourceTree = "<group>"; };
+		7176AC5118E03DEF00EF3E68 /* libMobClickLibrary_armv6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary_armv6.a; sourceTree = "<group>"; };
+		7176AC5218E03DEF00EF3E68 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		7176AC5318E03DEF00EF3E68 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		71F2309E18D93C5900563A06 /* btn_icon_site.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_icon_site.png; sourceTree = "<group>"; };
 		71F2309F18D93C5900563A06 /* btn_icon_site@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_icon_site@2x.png"; sourceTree = "<group>"; };
 		71F230A218D9897900563A06 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
@@ -478,14 +483,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				711C8FE518D83E090081B1D5 /* libz.dylib in Frameworks */,
 				3B834D2118B8792600AA5876 /* UIKit.framework in Frameworks */,
 				3B834D1D18B8792600AA5876 /* Foundation.framework in Frameworks */,
 				3B834D1F18B8792600AA5876 /* CoreGraphics.framework in Frameworks */,
 				6E18A4B218CD5D80005431A4 /* SystemConfiguration.framework in Frameworks */,
+				7176AC5418E03DEF00EF3E68 /* libMobClickLibrary_armv6.a in Frameworks */,
 				6E18A4B618CD5D9F005431A4 /* CoreTelephony.framework in Frameworks */,
 				6E25152D18DAA66B0025AC59 /* CoreFoundation.framework in Frameworks */,
 				6E25152B18DAA65D0025AC59 /* CFNetwork.framework in Frameworks */,
-				711C8FE518D83E090081B1D5 /* libz.dylib in Frameworks */,
 				711C90D518D843A80081B1D5 /* InstapaperConnection.framework in Frameworks */,
 				6E18A4BC18CD5DF7005431A4 /* libstdc++.dylib in Frameworks */,
 				711C90EC18D843A80081B1D5 /* AGCommon.framework in Frameworks */,
@@ -552,6 +558,7 @@
 				711C90E018D843A80081B1D5 /* SinaWeiboConnection.framework in Frameworks */,
 				711C90E118D843A80081B1D5 /* SMSConnection.framework in Frameworks */,
 				711C90E318D843A80081B1D5 /* SohuWeiboConnection.framework in Frameworks */,
+				7176AC5518E03DEF00EF3E68 /* libMobClickLibrary.a in Frameworks */,
 				711C90CD18D843A80081B1D5 /* CopyConnection.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -611,6 +618,7 @@
 		3B7CD26518B9D4F300EC1975 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				7176AC5018E03DC300EF3E68 /* UMSDK */,
 				7105722818DD6178009D26F0 /* JPush */,
 				6E33071318DBDD8F008D9D8C /* AKSegmentedControl */,
 				711C907918D843A80081B1D5 /* ShareSDK */,
@@ -1107,6 +1115,16 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		7176AC5018E03DC300EF3E68 /* UMSDK */ = {
+			isa = PBXGroup;
+			children = (
+				7176AC5118E03DEF00EF3E68 /* libMobClickLibrary_armv6.a */,
+				7176AC5218E03DEF00EF3E68 /* libMobClickLibrary.a */,
+				7176AC5318E03DEF00EF3E68 /* MobClick.h */,
+			);
+			name = UMSDK;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1564,6 +1582,7 @@
 					"$(PROJECT_DIR)/HandOnEastWind/libs/ShareSDK/Extend/YiXinSDK",
 					/Users/jijeMac/Desktop/poketeastwind/HandOnEastWind/HandOnEastWind/libs/JPush,
 					"$(PROJECT_DIR)/HandOnEastWind/libs/JPush",
+					"$(PROJECT_DIR)/HandOnEastWind/libs",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1635,6 +1654,7 @@
 					"$(PROJECT_DIR)/HandOnEastWind/libs/ShareSDK/Extend/YiXinSDK",
 					/Users/jijeMac/Desktop/poketeastwind/HandOnEastWind/HandOnEastWind/libs/JPush,
 					"$(PROJECT_DIR)/HandOnEastWind/libs/JPush",
+					"$(PROJECT_DIR)/HandOnEastWind/libs",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
