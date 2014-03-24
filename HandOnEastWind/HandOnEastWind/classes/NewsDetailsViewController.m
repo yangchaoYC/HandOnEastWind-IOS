@@ -65,13 +65,13 @@
     }
     switch ([self getFontsize]) {
         case 0:
-            html = [html stringByReplacingOccurrencesOfString:@"{fontSize}" withString:@"10pt"];
+            html = [html stringByReplacingOccurrencesOfString:@"{fontSize}" withString:@"13pt"];
             break;
         case 1:
-            html = [html stringByReplacingOccurrencesOfString:@"{fontSize}" withString:@"15pt"];
+            html = [html stringByReplacingOccurrencesOfString:@"{fontSize}" withString:@"14pt"];
             break;
         case 2:
-            html = [html stringByReplacingOccurrencesOfString:@"{fontSize}" withString:@"20pt"];
+            html = [html stringByReplacingOccurrencesOfString:@"{fontSize}" withString:@"17pt"];
             break;
         default:
             break;

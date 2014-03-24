@@ -9,53 +9,69 @@
             switch(fontIndex)
             {
                 case 0:
-                document.getElementById('content').style.fontSize = "10pt";
+                document.getElementById('content').style.fontSize = "13pt";
                 
                 break;
                 case 1:
-                document.getElementById('content').style.fontSize = "15pt";
+                document.getElementById('content').style.fontSize = "14pt";
                 
                 break;
                 case 2:
-                document.getElementById('content').style.fontSize = "20pt";
+                document.getElementById('content').style.fontSize = "17pt";
                 break;
                 default:
                 break;
             }
         }
     </script>
-    <style>
-        
-        #main img
-        {
-            max-width:300px;
+    <style type="text/css">
+        body{
             margin:0 auto;
-            border-radius: 5px;
+            
+            text-align:left;
         }
-    #content
-    {
-        font-size:{fontSize};
-        width:310px;
-        word-break:break-all;
-        word-wrap:break-word;
-        text-indent:2;
+    
+    div.contentB img{
+        max-width:100% !important;
+        height:auto !important;
     }
 </style>
 </head>
 	<body>
-		<div id="main">
-			<div>
-				<h3>{title}</h3>
-				<table>
-
-				<tr>
-                    <td>{time}</td>
-					</tr>
-				</table>
-			</div>
-			<div id="content">
-                {Content}
-			</div>
+		<div style="padding:0px">
+            <div class="top">
+                <div class="contentA"
+                    style="
+                    border-left: 10px #C93 solid;
+                    margin-top:10px;
+                    padding-top:3px;
+                    padding-bottom:3px;">
+                    
+                    <div class="title" style="
+                        margin-left:10px;
+                        margin-bottom:10px;
+                        font-size:19px;
+                        "><b></>{title}</b></div>
+                    
+                    <div class="newsandtime" style="
+                        font-size:10px;
+                        color:#999;
+                        margin-left:10px">
+                        <div class="c">{time} &ensp;&ensp;&ensp;&ensp; {meidaSting}</div>
+                        
+                    </div>
+                    
+                </div>
+                <div id="content" class="contentB" style="
+                    margin-left:10px;
+                    margin-right:10px;
+                    line-height:25px"
+                    >
+                    
+                    {Content}
+                    
+                </div>
+	
 		</div>
 	</body>
 </html>
