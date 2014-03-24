@@ -14,6 +14,8 @@ static NSString *appLoadADKey = @"软件启动";
 
 @interface ADWindow()
 @property(nonatomic,strong)UIImageView *adImageView;
+@property(nonatomic,strong)UIImageView *logoImageView;
+@property(nonatomic,strong)UILabel *copyrightLabel;
 @end
 
 @implementation ADWindow
@@ -71,10 +73,24 @@ static NSString *appLoadADKey = @"软件启动";
     if (self) {
         // Initialization code
         self.userInteractionEnabled = YES;
-        self.backgroundColor = [UIColor whiteColor];
-        self.adImageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        self.adImageView.center = self.center;
+        self.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:241.0f/255.0f  blue:239.0f/255.0f  alpha:1];
+        self.adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 384)];
+       // self.adImageView.center = self.center;
         [self addSubview:self.adImageView];
+        
+        self.logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 400, 320, 40)];
+        self.logoImageView.image = [UIImage imageNamed:@"logo.png"];
+        [self addSubview:self.logoImageView];
+        
+        self.copyrightLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 455, 320, 20)];
+        self.copyrightLabel.text = @"Copyright©2014 dfcm.cc.inc, All Rights Reserved";
+        self.copyrightLabel.textAlignment = NSTextAlignmentCenter;
+        self.copyrightLabel.backgroundColor = [UIColor clearColor];
+        self.copyrightLabel.font = [UIFont fontWithName:@"ARIAL" size:8.0f];
+        self.copyrightLabel.textColor = [UIColor colorWithRed:109.0f/255.0f green:109.0f/255.0f blue:109.0f/255.0f alpha:1];
+        [self addSubview:self.copyrightLabel];
+        
+        
     }
     return self;
 }
