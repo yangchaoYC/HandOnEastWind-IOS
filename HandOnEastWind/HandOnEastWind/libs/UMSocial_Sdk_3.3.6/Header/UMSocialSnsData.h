@@ -179,6 +179,18 @@ typedef enum {
  */
 @property (nonatomic, copy) NSString *title;
 
+/**
+ 应用名称
+ 
+ */
+@property (nonatomic, copy) NSString *appName;
+
+/**
+ 应用链接地址
+ 
+ */
+@property (nonatomic, copy) NSString *url;
+
 @end
 
 /**
@@ -254,6 +266,39 @@ typedef enum {
 
 
 /**
+ 分享到微信收藏
+ 
+ */
+@interface UMSocialWechatFavorite : UMSocialSnsData
+
+/**
+ 图文分享标题
+ 
+ */
+@property (nonatomic, copy) NSString * title;
+
+/** App文件数据，该数据发送给微信好友，微信好友需要点击后下载数据，微信终端会回传给第三方程序处理
+ * @attention 大小不能超过10M
+ 
+ */
+@property (nonatomic, retain) NSData   *fileData;
+
+/**
+ 微信消息类型，包括'UMSocialWXMessageTypeText'文字，'UMSocialWXMessageTypeImage'图片，'UMSocialWXMessageTypeApp'应用类型
+ 
+ */
+@property (nonatomic, assign) UMSocialWXMessageType wxMessageType;
+
+
+/**
+ 微信网页消息url
+ 
+ */
+@property (nonatomic, copy) NSString * url;
+
+@end
+
+/**
  分享到QQ好友
  
  */
@@ -271,6 +316,10 @@ typedef enum {
  */
 @property (nonatomic, copy) NSString *title;
 
+/**
+ 分享到QQ好友的消息类型
+ 
+ */
 @property (nonatomic, assign) UMSocialQQMessageType qqMessageType;
 
 @end
@@ -280,6 +329,16 @@ typedef enum {
  
  */
 @interface UMSocialRenrenData : UMSocialSnsData
+
+/**
+ 分享内容链接地址
+ */
+@property (nonatomic, copy) NSString *url;
+
+/**
+ 应用名称
+ */
+@property (nonatomic, copy) NSString *appName;
 
 @end
 
@@ -330,13 +389,6 @@ typedef enum {
 
 
 /**
- 分享到Twitter
- */
-@interface UMSocialTwitterData : UMSocialSnsData
-
-@end
-
-/**
  分享到易信好友
  */
 @interface UMSocialYXSessionData : UMSocialSnsData
@@ -381,6 +433,15 @@ typedef enum {
 
 @end
 
+/**
+ 分享到Twitter
+ */
+@interface UMSocialTwitterData : UMSocialSnsData
+
+@end
+
+
+
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -412,6 +473,11 @@ typedef enum {
  
  */
 @property (nonatomic, retain) UMSocialWechatTimelineData *wechatTimelineData;
+
+/**
+ 微信收藏
+ */
+@property (nonatomic, retain) UMSocialWechatFavorite * wechatFavoriteData;
 
 /**
  分享到QQ内容

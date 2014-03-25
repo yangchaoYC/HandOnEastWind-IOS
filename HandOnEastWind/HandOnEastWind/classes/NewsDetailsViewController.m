@@ -10,7 +10,7 @@
 #import "NewsModel.h"
 #import "RegexKitLite.h"
 #import "UMSocial.h"
-#import <ShareSDK/ShareSDK.h>
+
 #import "AKSegmentedControl.h"
 
 @interface NewsDetailsViewController ()<UIWebViewDelegate>
@@ -163,7 +163,7 @@
 
 - (IBAction)shareBtnClick:(id)sender
 {
-    /*
+   
     
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"507fcab25270157b37000010"
@@ -171,13 +171,14 @@
                                      shareImage:[UIImage imageNamed:@"icon.png"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToSms,UMShareToEmail,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:nil];
-    */
+   
     
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK"  ofType:@"jpg"];
     
     
     NSString *shareString = [NSString stringWithFormat:@"我在掌上东风应用中看到一条信息,你也来看看把!---%@news/%@.html",BASE_URL,self.newsItem.nid];
     //构造分享内容
+    /*
     id<ISSContent> publishContent = [ShareSDK content:shareString
                                        defaultContent:@"东风传媒为您提供最新的信息"
                                                 image:[ShareSDK imageWithPath:imagePath]
@@ -202,7 +203,7 @@
                                     NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
                                 }
                             }];
-    
+    */
 }
 
 @end

@@ -120,6 +120,7 @@
 "sms" = "SMS";
 "wechat_session" = "Wechat";
 "wechat_timeline" = "Moments";
+"wechat_favorite" = "Wechat Favorite";
 "facebook" = "Facebook";
 "twitter" = "Twitter";
 "mobile_qq" = "QQ";

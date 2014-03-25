@@ -10,15 +10,11 @@
 #import "FMDatabase.h"
 #import "ADWindow.h"
 #import "UMSocial.h"
-#import <ShareSDK/ShareSDK.h>
-#import "WeiboSDK.h"
 #import "WXApi.h"
-#import "WeiboApi.h"
 #import "WXApiObject.h"
-#import "YXApi.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
-
+#import "UMSocialWechatHandler.h"
 #import "APService.h"
 
 #define DB_PATH [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES) lastObject]
@@ -27,9 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    [ShareSDK registerApp:@"15415d0dd348"];
-    
+
 
     [MobClick startWithAppkey:@"5330055056240bfa6400a30b" reportPolicy:SEND_INTERVAL   channelId:@"掌上东风"];
     
@@ -37,6 +31,11 @@
     [MobClick setAppVersion:version];
     
     [MobClick checkUpdate];
+    
+    
+    [UMSocialData setAppKey:@"507fcab25270157b37000010"];
+    
+    [UMSocialWechatHandler setWXAppId:@"wxd9a39c7122aa6516" url:@"http://www.dfcm.cc/"];
     
     
     [self initDatabase];
@@ -55,12 +54,8 @@
     }];
     
     
-    [UMSocialData setAppKey:@"507fcab25270157b37000010"];
     
-    
-    
-    
-    
+    /*
     //添加新浪微博应用
     [ShareSDK connectSinaWeiboWithAppKey:@"3201194191"
                                appSecret:@"0334252914651e8f76bad63337b3b78f"
@@ -81,7 +76,7 @@
     
     //连接邮件
     [ShareSDK connectMail];
-    
+    */
     //推送配置
     // Required
     [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
@@ -92,7 +87,7 @@
 }
 
 
-
+/*
 - (BOOL)application:(UIApplication *)application  handleOpenURL:(NSURL *)url
 {
     return [ShareSDK handleOpenURL:url
@@ -109,7 +104,7 @@
                         annotation:annotation
                         wxDelegate:self];
 }
-
+*/
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     // Required

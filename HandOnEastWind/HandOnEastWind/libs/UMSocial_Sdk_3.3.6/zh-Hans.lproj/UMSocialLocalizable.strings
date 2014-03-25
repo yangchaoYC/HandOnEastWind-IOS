@@ -119,6 +119,7 @@
 "sms" = "短信";
 "wechat_session" = "微信好友";
 "wechat_timeline" = "朋友圈";
+"wechat_favorite" = "微信收藏";
 "facebook" = "Facebook";
 "twitter" = "Twitter";
 "mobile_qq" = "QQ";

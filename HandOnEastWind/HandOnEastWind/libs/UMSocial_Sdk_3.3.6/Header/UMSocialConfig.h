@@ -246,7 +246,7 @@ typedef void (^UMTableViewCellConfig)(UITableViewCell *cell,UMSViewControllerTyp
  @param url   微信图文分享web类型，用到的url地址，如果传nil，默认使用http://www.umeng.com/social
  */
 
-+ (void)setWXAppId:(NSString *)appId url:(NSString *)url;
+//+ (void)setWXAppId:(NSString *)appId url:(NSString *)url;
 
 
 /**设置手机QQ的appId和微信图文分享用到的url地址
