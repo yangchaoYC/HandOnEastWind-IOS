@@ -74,15 +74,15 @@ static NSString *appLoadADKey = @"软件启动";
         // Initialization code
         self.userInteractionEnabled = YES;
         self.backgroundColor = [UIColor colorWithRed:242.0f/255.0f green:241.0f/255.0f  blue:239.0f/255.0f  alpha:1];
-        self.adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 384)];
+        self.adImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 384 + IS_IP5_SIZE)];
        // self.adImageView.center = self.center;
         [self addSubview:self.adImageView];
         
-        self.logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 400, 320, 40)];
+        self.logoImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 400 + IS_IP5_SIZE, 320, 40)];
         self.logoImageView.image = [UIImage imageNamed:@"logo.png"];
         [self addSubview:self.logoImageView];
         
-        self.copyrightLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 455, 320, 20)];
+        self.copyrightLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 455 + IS_IP5_SIZE, 320, 20)];
         self.copyrightLabel.text = @"Copyright©2014 dfcm.cc.inc, All Rights Reserved";
         self.copyrightLabel.textAlignment = NSTextAlignmentCenter;
         self.copyrightLabel.backgroundColor = [UIColor clearColor];

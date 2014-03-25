@@ -162,6 +162,16 @@
         case 5:
         {
             titleLabel.text = @"检查更新";
+            
+            NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+            NSLog(@"%@",version);
+            
+            UILabel *cacheLabel = [[UILabel alloc] initWithFrame:CGRectMake(180, 8, 120, 30)];
+            cacheLabel.font = [UIFont systemFontOfSize:14.0f];
+            cacheLabel.textColor = [UIColor colorWithRed:200.0f/255.0f green:200.0f/255.0f  blue:200.0f/255.0f  alpha:1];
+            cacheLabel.text = [NSString stringWithFormat:@"当前版本 %@ ",version];
+            [cell.contentView addSubview:cacheLabel];
+            
         }
             break;
         default:
@@ -315,12 +325,21 @@
             break;
         case 5:
             //检查更新
+        {
+           // [MobClick checkUpdateWithDelegate:self selector:@selector(Update:)];
+            [MobClick checkUpdate];
+        }
+            
             break;
         default:
             break;
     }
 }
 
+-(void)Update:(NSDictionary *)info
+{
+    NSLog(@"%@",info);
+}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
