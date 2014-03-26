@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingViewController : UIViewController
+@interface SettingViewController : UIViewController<UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *settingTableView;
 @property (weak, nonatomic) IBOutlet UIView *view_Table;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
 @end

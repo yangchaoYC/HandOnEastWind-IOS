@@ -17,10 +17,15 @@
 #define AD_CACHE_PATH [ITCACHE_PATH stringByAppendingPathComponent:@"AD_CACHE"]
 
 @interface SettingViewController ()<UITableViewDataSource,UITableViewDelegate>
+{
+    NSDictionary *version;
+}
 
+@property(nonatomic,strong)UIAlertView *alert;
 @end
 
 @implementation SettingViewController
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -54,7 +59,7 @@
     self.settingTableView.showsVerticalScrollIndicator = NO;
     
     self.view_Table.frame = CGRectMake(9, 70 + IS_IP5, 302, 265);
-    
+    self.activity.hidden = YES;
 
 }
 
@@ -164,7 +169,7 @@
             titleLabel.text = @"检查更新";
             
             NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
-            NSLog(@"%@",version);
+        //    NSLog(@"%@",version);
             
             UILabel *cacheLabel = [[UILabel alloc] initWithFrame:CGRectMake(180, 8, 120, 30)];
             cacheLabel.font = [UIFont systemFontOfSize:14.0f];
@@ -326,8 +331,12 @@
         case 5:
             //检查更新
         {
-           // [MobClick checkUpdateWithDelegate:self selector:@selector(Update:)];
-            [MobClick checkUpdate];
+            
+            self.activity.hidden = NO;
+            [self.activity startAnimating];
+            self.activity.hidesWhenStopped = YES;
+            [MobClick checkUpdateWithDelegate:self selector:@selector(Update:)];
+
         }
             
             break;
@@ -338,7 +347,44 @@
 
 -(void)Update:(NSDictionary *)info
 {
+    [self.activity stopAnimating];
+    version = info;
+    
     NSLog(@"%@",info);
+    NSString *update = [NSString stringWithFormat:@"%@",[version objectForKey:@"update"]];
+      if ([update isEqualToString:@"NO"]) {
+        _alert = [[UIAlertView alloc]initWithTitle:@"当前版本是最新" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [_alert show];
+    }
+    else
+    {
+        NSString *title = [NSString stringWithFormat:@"有可用的新版本%@",[version objectForKey:@"version"]];
+        NSString *message = [NSString stringWithFormat:@"%@",[version objectForKey:@"update_log"]];
+
+         _alert = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"忽略此版本" otherButtonTitles:@"访问 Store",nil];
+        [_alert show];
+        
+    }
+}
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            [_alert removeFromSuperview];
+            break;
+        case 1:
+            [self updateURL];
+            break;
+        default:
+            break;
+    }
+}
+
+-(void)updateURL
+{
+    NSLog(@"%@",[version objectForKey:@"path"]);
+    NSString *URL = [NSString stringWithFormat:@"%@",[version objectForKey:@"path"]];
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:URL]];
 }
 
 

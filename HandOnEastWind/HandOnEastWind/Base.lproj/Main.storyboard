@@ -177,11 +177,16 @@
                                 <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="deviceRGB"/>
                                 <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="qMo-Jn-qR6">
+                                <rect key="frame" x="158" y="200" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="设置" id="6kS-aD-qc5"/>
                     <connections>
+                        <outlet property="activity" destination="qMo-Jn-qR6" id="e5z-ak-yj8"/>
                         <outlet property="settingTableView" destination="l0y-j4-BFk" id="e2M-3z-cTs"/>
                         <outlet property="view_Table" destination="D5s-Fh-wzM" id="2o2-sg-Rpa"/>
                         <segue destination="nEo-af-I74" kind="push" identifier="directions" id="fvx-Z2-Fss"/>
