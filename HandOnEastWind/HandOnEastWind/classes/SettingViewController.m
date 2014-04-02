@@ -347,6 +347,7 @@
 
 -(void)Update:(NSDictionary *)info
 {
+    
     [self.activity stopAnimating];
     version = info;
     
@@ -356,7 +357,7 @@
         _alert = [[UIAlertView alloc]initWithTitle:@"当前版本是最新" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [_alert show];
     }
-    else
+    else if([update isEqualToString:@"YES"])
     {
         NSString *title = [NSString stringWithFormat:@"有可用的新版本%@",[version objectForKey:@"version"]];
         NSString *message = [NSString stringWithFormat:@"%@",[version objectForKey:@"update_log"]];
@@ -365,6 +366,12 @@
         [_alert show];
         
     }
+    else
+    {
+        _alert = [[UIAlertView alloc]initWithTitle:@"超时，请稍后再试" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [_alert show];
+    }
+    
 }
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {

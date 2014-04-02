@@ -25,7 +25,7 @@
 {
 
 
-    [MobClick startWithAppkey:@"5330055056240bfa6400a30b" reportPolicy:SEND_INTERVAL   channelId:@"掌上东风"];
+    [MobClick startWithAppkey:@"533a661656240b29e8017e88" reportPolicy:SEND_INTERVAL   channelId:@"掌上东风"];
     
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
@@ -33,7 +33,7 @@
     [MobClick checkUpdate];
     
     
-    [UMSocialData setAppKey:@"507fcab25270157b37000010"];
+    [UMSocialData setAppKey:@"533a661656240b29e8017e88"];
     
     [UMSocialWechatHandler setWXAppId:@"wxd9a39c7122aa6516" url:@"http://www.dfcm.cc/"];
     
