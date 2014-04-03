@@ -7,16 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol CustomTabBarViewSelectedDelegate;
 
 @interface CustomTabBarView : UIView
-@property(nonatomic,assign)id<CustomTabBarViewSelectedDelegate> selectedDelegate;
 @property(nonatomic,assign)int currentSelectedIndex;
-
-@end
-
-@protocol CustomTabBarViewSelectedDelegate <NSObject>
-
-- (void)selectedTabBarAtIndex:(NSInteger)index_;
-
+@property(nonatomic,copy)void(^selectdCallBackBlock)(int selectedIndex);
 @end

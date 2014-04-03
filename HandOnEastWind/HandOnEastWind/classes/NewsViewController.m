@@ -386,7 +386,7 @@
     static NSString *newsFocusCellIdentifier = @"newsFocusCell";
     
     NewsModel *newsItem = [[(PullTableView *)tableView dataArray] objectAtIndex:indexPath.row];
-
+    
     UITableViewCell *cell = nil;
     if (indexPath.row == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:newsFocusCellIdentifier];
@@ -432,7 +432,7 @@
     
     return cell;
 }
-    
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NewsModel *newsItem = [[(PullTableView *)tableView dataArray] objectAtIndex:indexPath.row];
@@ -454,8 +454,6 @@
         [send setValue:sender forKey:@"newsItem"];
     }
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {

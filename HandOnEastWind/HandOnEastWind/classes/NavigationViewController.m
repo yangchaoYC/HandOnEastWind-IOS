@@ -122,7 +122,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"SelectNavigation" object:[self.navigationsArray objectAtIndex:indexPath.row]];
+    self.selectNavigationCallbackBlock([self.navigationsArray objectAtIndex:indexPath.row]);
 }
 
 - (IBAction)showPartners:(id)sender

@@ -9,9 +9,10 @@
 #import "HomeViewController.h"
 #import "CustomTabBarView.h"
 #import "NewsViewController.h"
+#import "NavigationViewController.h"
 
-@interface HomeViewController ()<CustomTabBarViewSelectedDelegate>
-
+@interface HomeViewController ()
+@property(nonatomic,strong)CustomTabBarView *customTabBar;
 @end
 
 @implementation HomeViewController
@@ -33,59 +34,47 @@
     self.navigationController.navigationBarHidden = YES;
     self.hidesBottomBarWhenPushed = YES;
     
-    for (UIView *v in [self.view subviews]) {
-        if ([v isKindOfClass:[UITabBar class]]) {
-            CustomTabBarView *tabBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomTabBarView" owner:self options:nil] lastObject];
-            tabBar.frame = self.tabBar.frame;
-            
-            tabBar.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-            
-            tabBar.selectedDelegate = self;
-            [self.view insertSubview:tabBar aboveSubview:v];
-            
-            break;
-        }
-    }
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectNavigation:) name:@"SelectNavigation" object:nil];
-    
-}
-
-- (void)selectNavigation:(NSNotification *)notif
-{
-    [self selectedTabBarAtIndex:1];
-    
-    for (UIView *v in [self.view subviews]) {
-        if ([v isKindOfClass:[CustomTabBarView class]]) {
-            for (UIImageView *item in [v subviews]) {
-                if (item.tag == 0) {
-                    [item setHighlighted:NO];
-                }
-                if (item.tag == 1) {
-                    [item setHighlighted:YES];
-                }
-            }
-            [(CustomTabBarView *)v setCurrentSelectedIndex:1];
-            break;
-        }
-    }
+    self.customTabBar = [[[NSBundle mainBundle] loadNibNamed:@"CustomTabBarView" owner:self options:nil] lastObject];
+    self.customTabBar.frame = self.tabBar.frame;
+    self.customTabBar.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+    __unsafe_unretained HomeViewController *safe_self = self;
+    self.customTabBar.selectdCallBackBlock = ^(int index){
+        [safe_self setSelectedIndex:index];
+    };
+    [self.view insertSubview:self.customTabBar aboveSubview:self.tabBar];
     
     for (UIViewController *controller in [self viewControllers]) {
-        if ([controller isKindOfClass:[NewsViewController class]]) {
-            [(NewsViewController *)controller refreshContent:notif.object];
+        if ([controller isKindOfClass:[NavigationViewController class]]) {
+            [(NavigationViewController *)controller setSelectNavigationCallbackBlock:^(NSString *navigationString) {
+                [safe_self setSelectedIndex:1];
+                for (UIViewController *controller in [safe_self viewControllers]) {
+                    if ([controller isKindOfClass:[NewsViewController class]]) {
+                        [(NewsViewController *)controller refreshContent:navigationString];
+                    }
+                    break;
+                }
+            }];
+            break;
         }
     }
+
 }
 
-- (void)selectedTabBarAtIndex:(NSInteger)index_
+- (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
-    [self setSelectedIndex:index_];
+    [super setSelectedIndex:selectedIndex];
+    for (UIImageView *item in [self.customTabBar subviews]) {
+        if (item.tag == selectedIndex) {
+            [item setHighlighted:YES];
+        }
+        else
+        {
+            [item setHighlighted:NO];
+        }
+    }
+    [self.customTabBar setCurrentSelectedIndex:selectedIndex];
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:@"SelectNavigation"];
-}
 
 - (void)didReceiveMemoryWarning
 {

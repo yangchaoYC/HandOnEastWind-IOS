@@ -32,31 +32,10 @@
     }
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 -(void)itemTap:(UITapGestureRecognizer *)ges
 {
     if (self.currentSelectedIndex != ges.view.tag) {
-        
-        for (UIImageView *item in [self subviews]) {
-            if (item.tag == self.currentSelectedIndex) {
-                [item setHighlighted:NO];
-            }
-            if (item.tag == ges.view.tag) {
-                [item setHighlighted:YES];
-            }
-        }
-        
-        [self.selectedDelegate selectedTabBarAtIndex:[ges.view tag]];
-        
-        self.currentSelectedIndex = ges.view.tag;
+        self.selectdCallBackBlock(ges.view.tag);
     }
 }
 

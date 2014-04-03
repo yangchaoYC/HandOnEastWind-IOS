@@ -36,8 +36,6 @@
     return self;
 }
 
-
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -60,7 +58,6 @@
     
     self.view_Table.frame = CGRectMake(9, 70 + IS_IP5, 302, 265);
     self.activity.hidden = YES;
-
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

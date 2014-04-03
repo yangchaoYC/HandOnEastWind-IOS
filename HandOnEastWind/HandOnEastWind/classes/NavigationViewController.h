@@ -11,4 +11,5 @@
 @interface NavigationViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *navigationTableView;
 - (IBAction)showPartners:(id)sender;
+@property(copy,nonatomic)void(^selectNavigationCallbackBlock)(NSString *navigationString);
 @end

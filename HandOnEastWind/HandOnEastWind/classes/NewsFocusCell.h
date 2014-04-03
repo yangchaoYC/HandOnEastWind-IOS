@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface NewsFocusCell : UITableViewCell
-    @property (weak, nonatomic) IBOutlet UIImageView *focusImageView;
-    @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *focusImageView;
+@property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 
 @end

@@ -12,8 +12,8 @@
 #import "UMSocial.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
-#import <TencentOpenAPI/TencentOAuth.h>
-#import <TencentOpenAPI/QQApiInterface.h>
+//#import <TencentOpenAPI/TencentOAuth.h>
+//#import <TencentOpenAPI/QQApiInterface.h>
 #import "UMSocialWechatHandler.h"
 #import "APService.h"
 
