@@ -105,7 +105,7 @@
     [btn setTitle:titleString forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:12.0f];
     
-    [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [btn setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted|UIControlStateSelected)];
@@ -164,19 +164,20 @@
 - (IBAction)shareBtnClick:(id)sender
 {
    
+     NSString *shareString = [NSString stringWithFormat:@"我在掌上东风应用中看到一条信息,你也来看看把!---%@news/%@.html",BASE_URL,self.newsItem.nid];
     
     [UMSocialSnsService presentSnsIconSheetView:self
-                                         appKey:@"507fcab25270157b37000010"
-                                      shareText:@"你要分享的文字"
+                                         appKey:@"533a661656240b29e8017e88"
+                                      shareText:shareString
                                      shareImage:[UIImage imageNamed:@"icon.png"]
                                 shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToSms,UMShareToEmail,UMShareToWechatSession,UMShareToWechatTimeline,nil]
                                        delegate:nil];
    
     
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK"  ofType:@"jpg"];
+  //  NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK"  ofType:@"jpg"];
     
     
-    NSString *shareString = [NSString stringWithFormat:@"我在掌上东风应用中看到一条信息,你也来看看把!---%@news/%@.html",BASE_URL,self.newsItem.nid];
+   
     //构造分享内容
     /*
     id<ISSContent> publishContent = [ShareSDK content:shareString

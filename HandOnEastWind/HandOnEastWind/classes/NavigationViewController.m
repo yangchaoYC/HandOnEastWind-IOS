@@ -35,7 +35,7 @@
     
     self.navigationsArray = @[@"东风汽车报",@"东风",@"汽车之旅",@"汽车科技",@"装备维修技术"];
     [self.navigationTableView reloadData];
-    
+    self.navigationTableView.bounces = NO;
     UISwipeGestureRecognizer *ges = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showADView:)];
     ges.direction = UISwipeGestureRecognizerDirectionRight;
     [self.navigationTableView addGestureRecognizer:ges];
@@ -59,7 +59,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 94.0f;
+    return (91.0f + IS_IP5_NAV_TABLE);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -103,7 +103,12 @@
         default:
             break;
     }
-   
+    if (!IS_IP5) {
+        navCell.iconImageView.frame = CGRectMake(10, 12, 148, 50);
+        navCell.detailLabel.frame = CGRectMake(174, 41, 140, 25);
+        navCell.titleLabel.frame = CGRectMake(174, 14, 135, 18);
+    }
+    
     return cell;
 }
 
