@@ -124,7 +124,6 @@
     [MobClick endLogPageView:@"PageOne"];
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectNavigationCallbackBlock([self.navigationsArray objectAtIndex:indexPath.row]);

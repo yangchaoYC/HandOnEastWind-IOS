@@ -50,8 +50,8 @@
                 for (UIViewController *controller in [safe_self viewControllers]) {
                     if ([controller isKindOfClass:[NewsViewController class]]) {
                         [(NewsViewController *)controller refreshContent:navigationString];
+                        break;
                     }
-                    break;
                 }
             }];
             break;
