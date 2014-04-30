@@ -81,7 +81,7 @@
     
     switch (indexPath.row) {
         case 0:
-            navCell.detailLabel.text = @"展示集团风采，弘扬精神文明";
+            navCell.detailLabel.text = @"在这里读懂东风";
             navCell.iconImageView.image = [UIImage imageNamed:@"nav_1.png"];
             break;
         case 1:

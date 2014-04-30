@@ -432,7 +432,7 @@
     <resources>
         <image name="btn_more.png" width="30" height="30"/>
         <image name="btn_partners.png" width="102" height="25"/>
-        <image name="erwei.png" width="495" height="495"/>
+        <image name="erwei.png" width="431" height="432"/>
         <image name="logo.png" width="320" height="40"/>
         <image name="news_detail_back.png" width="63" height="44"/>
         <image name="news_detail_share.png" width="61" height="44"/>

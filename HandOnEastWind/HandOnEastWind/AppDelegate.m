@@ -23,7 +23,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
+    id hasImage_ = [[NSUserDefaults standardUserDefaults] valueForKey:@"HASIMAGE"];
+    if (!hasImage_) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"HASIMAGE"];
+    }
 
     [MobClick startWithAppkey:@"533a661656240b29e8017e88" reportPolicy:SEND_INTERVAL   channelId:@"掌上东风"];
     

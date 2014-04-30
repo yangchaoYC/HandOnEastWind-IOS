@@ -233,14 +233,7 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:@"PageOne"];
-    id hasImage_ = [[NSUserDefaults standardUserDefaults] valueForKey:@"HASIMAGE"];
-    if (!hasImage_) {
-        self.hasImage = YES;
-    }
-    else
-    {
-        self.hasImage = [hasImage_ boolValue];
-    }
+    self.hasImage = [[[NSUserDefaults standardUserDefaults] valueForKey:@"HASIMAGE"] boolValue];
     
     for (UITableView *newsList in self.newsListTableViewsArray) {
         [newsList reloadData];
